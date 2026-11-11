@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchProducts } from "./prouctThunk";
 
 
+
 type Product = {
     id: number,
     title: string,
