@@ -11,12 +11,11 @@ function App() {
 
   return (
     <Provider store={store}>
-      <ProductsList>
-      </ProductsList>
-      <ErrorBoundary  fallback={<p>Something went wrong!</p>}>
-      <Suspense fallback={<p>loading...</p>}>
-        <Counter />
-      </Suspense>
+      <ProductsList />
+      <ErrorBoundary>
+        <Suspense fallback={<p>loading...</p>}>
+          <Counter />
+        </Suspense>
       </ErrorBoundary>
     </Provider>
   )

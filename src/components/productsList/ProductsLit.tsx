@@ -1,4 +1,4 @@
-import { useGetProductsQuery } from "../../services/productsApi";
+import { useGetProductsQuery } from "../../features/products/services/productsApi";
 
 
 function ProductsList() {
