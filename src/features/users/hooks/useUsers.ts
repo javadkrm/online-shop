@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../services/usersSerivice";
+import { getUsers } from "../services/usersService";
 import { type User } from "../types/User";
 
 export function useUsers() {
@@ -11,9 +11,7 @@ export function useUsers() {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-
         const data = await getUsers();
-
         setUsers(data);
       } catch {
         setError("دریافت کاربران با خطا مواجه شد");
