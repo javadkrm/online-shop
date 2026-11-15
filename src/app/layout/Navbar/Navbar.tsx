@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import './Navbar.css';
 import CartSummary from '../../../features/cart/components/CartSummary';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { addToCart, removeFromCart, clearCart } from '../../../features/cart/cartSlice';
 
 function Navbar() {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const cartItems = useAppSelector(state => state.cart.items);
+    const dispatch = useAppDispatch();
 
     return (
         <>
@@ -20,29 +22,56 @@ function Navbar() {
                     <div className="cart-modal-content" onClick={(e) => e.stopPropagation()}>
                         <div className="cart-modal-header">
                             <h3>سبد خرید شما</h3>
-                            <button 
-                                type="button" 
-                                className="close-modal-btn" 
+                            <button
+                                type="button"
+                                className="close-modal-btn"
                                 onClick={() => setIsCartOpen(false)}
                             >
                                 &times;
                             </button>
                         </div>
                         <div className="cart-modal-body">
-                            {/* اینجا می‌توانید محتویات و لیست آیتم‌های سبد خرید را قرار دهید */}
                             {cartItems.length === 0 ? (
                                 <p style={{ color: '#718096', textAlign: 'center', marginTop: '2rem' }}>
                                     محصولات انتخاب شده شما اینجا نمایش داده می‌شوند.
                                 </p>
                             ) : (
-                                <ul className='cartItems-list'>
-                                    {cartItems.map(item => (
-                                        <li className='cartItems-list-item' key={item.id}>
-                                            <img src={item.image} alt={item.title} className="cartItems-list-item-image" />
-                                            {item.title} - {item.price}
-                                        </li>
-                                    ))}
-                                </ul>
+                                <>
+                                    <ul className='cartItems-list'>
+                                        {cartItems.map(item => (
+                                            <li className='cartItems-list-item' key={item.id}>
+                                                <img src={item.image} alt={item.title} className="cartItems-list-item-image" />
+                                                <div className="cart-item-details">
+                                                    <p className="cart-item-title" title={item.title}>{item.title}</p>
+                                                    <p className="cart-item-price">${item.price.toFixed(2)}</p>
+                                                </div>
+                                                <div className="cart-item-actions">
+                                                    <button className="qty-btn" onClick={() => dispatch(removeFromCart(item.id))}>-</button>
+                                                    <span className="cart-item-quantity">{item.quantity}</span>
+                                                    <button className="qty-btn" onClick={() => dispatch(addToCart(item))}>+</button>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    <div className="cart-modal-footer">
+                                        <div className="cart-summary-total">
+                                            <span>مجموع قیمت:</span>
+                                            <span className="cart-total-price">
+                                                ${cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
+                                            </span>
+                                        </div>
+
+                                        <div className="cart-actions-container">
+                                            <button className="checkout-btn" onClick={() => alert('دکمه تسویه حساب کلیک شد!')}>
+                                                تسویه حساب
+                                            </button>
+                                            <button className="clear-cart-btn" onClick={() => dispatch(clearCart())}>
+                                                حذف همه
+                                            </button>
+                                        </div>
+                                    </div>
+                                </>
                             )}
                         </div>
                     </div>
