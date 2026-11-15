@@ -1,10 +1,22 @@
-import type { Middleware } from "@reduxjs/toolkit"
+import type { Middleware } from "@reduxjs/toolkit";
+import { saveCart } from "../CartStorage";
 
-const cartStorageMiddleware: Middleware = store => next => action => {
-    const result = next(action)
-    const cart = store.getState().cart
-    localStorage.setItem("cart", JSON.stringify(cart))
-    return result
-}
+export const cartStorageMiddleware: Middleware =
+  (store) => (next) => (action) => {
 
-export default cartStorageMiddleware
+    const result = next(action);
+
+    if (
+      typeof action === "object" &&
+      action !== null &&
+      "type" in action &&
+      typeof action.type === "string" &&
+      action.type.startsWith("cart/")
+    ) {
+      const cartItems = store.getState().cart.items;
+
+      saveCart(cartItems);
+    }
+
+    return result;
+  };

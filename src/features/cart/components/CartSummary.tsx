@@ -1,9 +1,18 @@
 import { useCart } from "../hooks/useCart";
 
-function CartSummary() {
-  const { quantity } = useCart();
+interface CartSummaryProps {
+    onClick: () => void;
+}
 
-  return <span>Cart Quantity: {quantity}</span>;
+function CartSummary({ onClick }: CartSummaryProps) {
+    const { quantity } = useCart();
+
+    return (
+        <button type="button" className="cart-summary-btn" onClick={onClick}>
+            <span>🛒 سبد خرید</span>
+            <span className="cart-badge">{quantity || 0}</span>
+        </button>
+    );
 }
 
 export default CartSummary;

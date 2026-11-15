@@ -2,7 +2,7 @@ import { Provider } from 'react-redux'
 import store from './app/store'
 import './App.css'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
-import Navbar from './app/layout/Navbar'
+import Navbar from './app/layout/Navbar/Navbar'
 import ProductsList from './features/products/components/productsList/ProductsList'
 
 function App() {
