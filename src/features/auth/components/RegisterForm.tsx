@@ -1,4 +1,4 @@
-import { useMemo, useReducer, useState } from "react"
+import { useMemo, useReducer, useState, type ChangeEvent, type FormEvent } from "react"
 
 
 interface FormState {
@@ -32,7 +32,7 @@ function RegisterForm() {
 
     const [form, dispatch] = useReducer(formReducer, initialState)
 
-    const [products, setProducts] = useState([{ id: 1, title: 'p1', price: 200 }, { id: 2, title: 'p2', price: 350 }])
+    const [products] = useState([{ id: 1, title: 'p1', price: 200 }, { id: 2, title: 'p2', price: 350 }])
 
     const expenciveProduts = useMemo(() => {
         return products.filter(product => (
@@ -62,9 +62,7 @@ function RegisterForm() {
         }
     }
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch({
             type: "CHANGE_FIELD",
             field: e.target.name as keyof FormState,
@@ -72,9 +70,7 @@ function RegisterForm() {
         });
     };
 
-    const handleSubmit = (
-        e: React.FormEvent<HTMLFormElement>
-    ) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         console.log(form);

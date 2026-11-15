@@ -1,4 +1,13 @@
-# React + TypeScript + Vite
+# Shop Management
+
+The application is organized by feature. Feature-specific state, components,
+hooks, services, types, and data live together under `src/features/<feature>`.
+Application-wide setup (such as the Redux store) lives under `src/app`, while
+`src/components` and `src/hooks` are reserved for reusable, domain-independent
+UI and hooks.
+
+Current features include `auth`, `cart`, `products`, and `users`. Cart state,
+its persistence middleware, and its UI are owned by `src/features/cart`.
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 

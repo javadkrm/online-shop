@@ -1,16 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-
-type CartItem = {
-    id: number,
-    title: string,
-    price: number,
-    quantity: number,
-    image?: string
-}
-
-type CartState = {
-    items: CartItem[]
-}
+import type { CartItem, CartState } from "./types/CartItem";
 
 const savedCart = localStorage.getItem("cart");
 
@@ -33,6 +22,10 @@ const cartSlice = createSlice({
         },
         removeFromCart(state, action: PayloadAction<number>) {
             const mainItemIndex = state.items.findIndex(item => item.id === action.payload)
+            if (mainItemIndex === -1) {
+                return
+            }
+
             if (state.items[mainItemIndex].quantity === 1) {
                 state.items.splice(mainItemIndex, 1)
             }

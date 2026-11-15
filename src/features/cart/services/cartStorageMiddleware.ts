@@ -1,10 +1,10 @@
 import type { Middleware } from "@reduxjs/toolkit"
 
-const addCartToLocalStorage: Middleware = store => next => action => {
+const cartStorageMiddleware: Middleware = store => next => action => {
     const result = next(action)
     const cart = store.getState().cart
     localStorage.setItem("cart", JSON.stringify(cart))
     return result
 }
 
-export default addCartToLocalStorage
+export default cartStorageMiddleware
