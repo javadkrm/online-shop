@@ -1,6 +1,6 @@
 import type { Product } from '../../services/productsApi'
 import { useAppDispatch } from '../../../../app/hooks'
-import { addToCart } from '../../../cart/cartSlice'
+import {  increaseCartQuantity } from '../../../cart/cartSlice'
 
 interface ProductItemProps {
     product: Product
@@ -27,7 +27,7 @@ function ProductItem({ product }: ProductItemProps) {
                     <button 
                         type="button" 
                         className="add-to-cart-btn"
-                        onClick={() => dispatch(addToCart(product))}
+                        onClick={() => dispatch(increaseCartQuantity(product))}
                     >
                         Add to Cart
                     </button>

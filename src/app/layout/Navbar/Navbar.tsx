@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './Navbar.css';
 import CartSummary from '../../../features/cart/components/CartSummary';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { addToCart, removeFromCart, clearCart } from '../../../features/cart/cartSlice';
+import { increaseCartQuantity, decreaseCartQuantity, clearCart, removeFromCart } from '../../../features/cart/cartSlice';
 
 function Navbar() {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -46,9 +46,10 @@ function Navbar() {
                                                     <p className="cart-item-price">${item.price.toFixed(2)}</p>
                                                 </div>
                                                 <div className="cart-item-actions">
-                                                    <button className="qty-btn" onClick={() => dispatch(removeFromCart(item.id))}>-</button>
+                                                    <button className="qty-btn" onClick={() => dispatch(decreaseCartQuantity(item.id))}>-</button>
                                                     <span className="cart-item-quantity">{item.quantity}</span>
-                                                    <button className="qty-btn" onClick={() => dispatch(addToCart(item))}>+</button>
+                                                    <button className="qty-btn" onClick={() => dispatch(increaseCartQuantity(item))}>+</button>
+                                                    <button className="qty-btn delete-btn" onClick={() => dispatch(removeFromCart(item.id))}>×</button>
                                                 </div>
                                             </li>
                                         ))}

@@ -310,3 +310,15 @@
 .clear-cart-btn:hover {
     background-color: #fed7d7;
 }
+
+.delete-btn {
+    background-color: #fff5f5;
+    color: #e53e3e;
+    border: 1px solid #fed7d7;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}

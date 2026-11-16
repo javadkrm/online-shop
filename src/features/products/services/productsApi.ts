@@ -1,17 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-export interface Product {
-    id: number;
-    title: string;
-    price: number;
-    image: string;
-}
-
-interface NewProduct {
-  title: string;
-  price: number;
-  image: string;
-}
+import {type Product, type NewProduct} from "../types/Product";
 
 export const productApi = createApi({
     reducerPath: "productApi",
@@ -36,4 +24,4 @@ export const productApi = createApi({
 
 });
 
-export const { useGetProductsQuery } = productApi;
+export const { useGetProductsQuery, useAddProductMutation } = productApi;
