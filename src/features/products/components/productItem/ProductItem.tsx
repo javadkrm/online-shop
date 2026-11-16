@@ -1,4 +1,4 @@
-import type { Product } from '../../services/productsApi'
+import type { Product } from '../../types/Product'
 import { useAppDispatch } from '../../../../app/hooks'
 import {  increaseCartQuantity } from '../../../cart/cartSlice'
 

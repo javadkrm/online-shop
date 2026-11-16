@@ -4,6 +4,7 @@ import './ProductList.css'
 
 const ProductsList = () => {
     const { data: products, isLoading, isError } = useGetProductsQuery()
+    // const {data : Products, isLoading, isError} = useAppDispatch((state: any) => state.products)
 
     if (isLoading) {
         return <p className="products-status">در حال دریافت محصولات...</p>
@@ -20,11 +21,11 @@ const ProductsList = () => {
     return (
         <div className="products-container">
             <ul className="products-grid">
-                {products.map(product => (
+                {products.length > 0 ? products.map(product => (
                     <li key={product.id}>
                         <ProductItem product={product} />
                     </li>
-                ))}
+                )) : <p className="products-status">محصولی یافت نشد.</p>}
             </ul>
         </div>
     )

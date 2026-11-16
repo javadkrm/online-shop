@@ -123,3 +123,10 @@
 .products-status.error {
     color: #e53e3e;
 }
+
+.products-status {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.1rem;
+    color: #718096;
+}
