@@ -1,21 +1,20 @@
 import { Provider } from 'react-redux'
-import store from './store/store'
+import store from './app/store'
 import './App.css'
-import ProductsList from './components/productsList/ProductsLit'
-import { products } from './data/products'
-import Product from './components/products/products'
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
+import Navbar from './app/layout/Navbar/Navbar'
+import ProductsList from './features/products/components/productsList/ProductsList'
+import ToastContainer from './components/ui/toast/ToastContainer'
 
 function App() {
 
   return (
     <Provider store={store}>
-      <ProductsList>
-        {products.map((pro) => (
-          <div key={pro.id}>
-            <Product {...pro} />
-          </div>
-        ))}
-      </ProductsList>
+      <ErrorBoundary>
+        <Navbar />
+        <ProductsList />
+      </ErrorBoundary>
+      <ToastContainer />
     </Provider>
   )
 }
