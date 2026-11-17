@@ -3,7 +3,6 @@ import { useState } from 'react'
 import ProductItem from '../productItem/ProductItem'
 import './ProductList.css'
 import { useGetProductsQuery } from '../../services/productsApi'
-import type { Product } from '../../types/Product'
 
 const ProductsList = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -12,10 +11,11 @@ const ProductsList = () => {
     const {
         data,
         isLoading,
+        isFetching,
         isError,
         error,
         refetch,
-    } = useGetProductsQuery({ page: currentPage, limit })
+    } = useGetProductsQuery({ page: currentPage, limit }, { refetchOnMountOrArgChange: 30 })
 
     const totalPages = Math.ceil((data?.total ?? 0) / limit) || 1
 
@@ -75,8 +75,15 @@ const ProductsList = () => {
 
     return (
         <div className="products-container">
+
+            {isFetching && !isLoading && (
+                <p className="fetching-indicator">
+                    در حال به‌روزرسانی محصولات...
+                </p>
+            )}
+            
             <ul className="products-grid">
-                {items.map((product : Product) => (
+                {items.map((product) => (
                     <li key={product.id}>
                         <ProductItem product={product} />
                     </li>
