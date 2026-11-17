@@ -26,6 +26,7 @@ interface ProductState {
   total: number;
   loading: boolean;
   error: ApiError | null;
+  currentRequestId : string | null
 }
 
 const initialState: ProductState = {
@@ -33,6 +34,7 @@ const initialState: ProductState = {
   total: 0,
   loading: false,
   error: null,
+  currentRequestId : null
 };
 
 const productSlice = createSlice({
@@ -48,6 +50,9 @@ const productSlice = createSlice({
       })
 
       .addCase(fetchProducts.fulfilled, (state, action) => {
+        if (state.currentRequestId !== action.meta.requestId) {
+          return
+        }
         state.loading = false;
         state.items = action.payload.products;
         state.total = action.payload.total;
