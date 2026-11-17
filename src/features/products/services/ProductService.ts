@@ -1,11 +1,25 @@
-async function getProducts () {
-    const url = "https://fakestoreapi.com/products";
-    const response = await fetch(url);
+import type { ApiError, ProductResponse } from "../types/Product";
 
-    if (!response.ok) {
-        throw new Error("Failed to fetch products");
-    }   
-    return response.json();
+export async function getProducts(
+  page: number,
+  limit: number
+): Promise<ProductResponse> {
+  const skip = (page - 1) * limit;
+
+  const response = await fetch(
+    `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
+  );
+
+  if (!response.ok) {
+    const errorData = await response.json();
+
+    const error: ApiError = {
+      message: errorData.message ?? "Failed to fetch products",
+      status: response.status,
+    };
+
+    throw error;
+  }
+
+  return response.json() as Promise<ProductResponse>;
 }
-
-export { getProducts };

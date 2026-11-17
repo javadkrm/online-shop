@@ -74,7 +74,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 2.8em; /* محدود کردن به دو خط */
+    height: 2.8em;
 }
 
 .product-footer {
@@ -124,9 +124,58 @@
     color: #e53e3e;
 }
 
-.products-status {
-    text-align: center;
-    padding: 3rem;
-    font-size: 1.1rem;
-    color: #718096;
+/* --- استایل جدید و حرفه‌ای Pagination --- */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    gap: 1rem;
+}
+
+.pagination-btn {
+    background-color: #ffffff;
+    color: #3182ce;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: #3182ce;
+    color: #ffffff;
+    border-color: #3182ce;
+    box-shadow: 0 4px 12px rgba(49, 130, 206, 0.25);
+    transform: translateY(-1px);
+}
+
+.pagination-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.pagination-btn:disabled {
+    background-color: #edf2f7;
+    color: #a0aec0;
+    border-color: #e2e8f0;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.pagination-info {
+    font-size: 0.95rem;
+    color: #4a5568;
+    font-weight: 500;
+    padding: 0 0.5rem;
+}
+
+.current-page {
+    font-weight: 700;
+    color: #2b6cb0;
+    display: inline-block;
+    padding: 0 0.2rem;
 }
