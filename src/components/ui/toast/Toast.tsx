@@ -18,7 +18,7 @@ const Toast = ({ toast, onClose }: Props) => {
     }, [toast.id, onClose]);
     
     const presentation = {
-        success: { label: "موفقیت", icon: "success" },
+        success: { label: "موفق", icon: "success" },
         error: { label: "خطا", icon: "error" },
         warning: { label: "هشدار", icon: "warning" },
         info: { label: "اطلاع‌رسانی", icon: "info" },
@@ -53,8 +53,8 @@ const Toast = ({ toast, onClose }: Props) => {
             </span>
 
             <div className="app-toast-content">
-                <strong className="app-toast-title">{currentPresentation.label}</strong>
-                <p className="app-toast-message">{toast.message}</p>
+                <strong className="app-toast-title fw-bolder fs-5">{currentPresentation.label}</strong>
+                <p className="app-toast-message fw-bold">{toast.message}</p>
             </div>
 
             <button

@@ -3,6 +3,7 @@ import './Navbar.css';
 import CartSummary from '../../../features/cart/components/CartSummary';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { increaseCartQuantity, decreaseCartQuantity, clearCart, removeFromCart } from '../../../features/cart/cartSlice';
+import { addToast } from '../../../features/feedback/feedbackSlice';
 
 function Navbar() {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -53,7 +54,10 @@ function Navbar() {
                                                     <button className="qty-btn" onClick={() => dispatch(decreaseCartQuantity(item.id))}>
                                                         <i className="fa fa-solid fa-minus"></i>
                                                     </button>
-                                                    <button className="qty-btn delete-btn" onClick={() => dispatch(removeFromCart(item.id))}>
+                                                    <button className="qty-btn delete-btn" onClick={() => {
+                                                        dispatch(removeFromCart(item.id))
+                                                        dispatch(addToast({id : `${Date.now()}-${item.id}`, type : "info", message: `${item.title} Removed from Cart`}))
+                                                        }}>
                                                         <i className="fa fa-solid fa-trash"></i>
                                                     </button>
                                                 </div>
