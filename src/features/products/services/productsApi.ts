@@ -1,27 +1,23 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import {type Product, type NewProduct} from "../types/Product";
 
-export const productApi = createApi({
-    reducerPath: "productApi",
+export const productsApi = createApi({
+    reducerPath: "productsApi",
 
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://fakestoreapi.com/",
+        baseUrl: "https://dummyjson.com/",
     }),
 
     endpoints: (builder) => ({
-        getProducts: builder.query<Product[], void>({
-            query: () => "products",
-        }),
-
-        addProduct: builder.mutation<Product, NewProduct>({
-            query: (newProduct) => ({
+        getProducts: builder.query({
+            query: ({ page, limit }) => ({
                 url: "products",
-                method: "POST",
-                body: newProduct,
+                params: {
+                    limit,
+                    skip: (page - 1) * limit,
+                },
             }),
         }),
     }),
-
 });
 
-export const { useGetProductsQuery, useAddProductMutation } = productApi;
+export const { useGetProductsQuery } = productsApi;

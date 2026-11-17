@@ -1,27 +1,25 @@
-import { useEffect, useState } from 'react'
-import { useAppSelector, useAppDispatch } from '../../../../app/hooks'
+
+import { useState } from 'react'
 import ProductItem from '../productItem/ProductItem'
 import './ProductList.css'
-import { fetchProducts } from '../../ProductSlice'
+import { useGetProductsQuery } from '../../services/productsApi'
+import type { Product } from '../../types/Product'
 
 const ProductsList = () => {
-    const dispatch = useAppDispatch()
     const [currentPage, setCurrentPage] = useState(1)
     const limit = 12
 
-    const { items, loading, error, total } = useAppSelector((state) => state.products)
-    const totalPages = Math.ceil(total / limit) || 1
+    const {
+        data,
+        isLoading,
+        isError,
+        error,
+        refetch,
+    } = useGetProductsQuery({ page: currentPage, limit })
 
-    useEffect(() => {
-        dispatch(fetchProducts({ page: currentPage, limit }))
-    }, [dispatch, currentPage])
+    const totalPages = Math.ceil((data?.total ?? 0) / limit) || 1
 
-    const handleRetry = () => {
-        dispatch(fetchProducts({ page: currentPage, limit }))
-    }
-
-    // لودینگ حرفه‌ای با Skeleton
-    if (loading) {
+    if (isLoading) {
         return (
             <div className="products-container">
                 <div className="products-grid">
@@ -43,24 +41,18 @@ const ProductsList = () => {
         )
     }
 
-    // حالت خطای پیشرفته با دکمه تلاش مجدد
-    if (error) {
+    if (isError) {
         const errorMessage =
-            error.status === 404
-                ? "محصول موردنظر پیدا نشد."
-                : error.status === 403
-                ? "شما اجازه دسترسی به این بخش را ندارید."
-                : "خطایی در برقراری ارتباط با سرور رخ داده است.";
+            'status' in error && error.status === 404
+                ? 'محصول موردنظر پیدا نشد.'
+                : 'خطایی در برقراری ارتباط با سرور رخ داده است.'
 
         return (
             <div className="products-status-container">
                 <div className="status-card error-card">
-                    <svg className="status-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
                     <h3>خطا در بارگذاری</h3>
                     <p>{errorMessage}</p>
-                    <button className="retry-btn" onClick={handleRetry}>
+                    <button className="retry-btn" onClick={refetch}>
                         تلاش مجدد
                     </button>
                 </div>
@@ -68,54 +60,54 @@ const ProductsList = () => {
         )
     }
 
+    const items = data?.products ?? []
+
+    if (items.length === 0) {
+        return (
+            <div className="products-status-container">
+                <div className="status-card empty-card">
+                    <h3>محصولی یافت نشد</h3>
+                    <p>در حال حاضر محصولی برای نمایش در این صفحه وجود ندارد.</p>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="products-container">
-            {items.length === 0 ? (
-                <div className="products-status-container">
-                    <div className="status-card empty-card">
-                        <svg className="status-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-                        </svg>
-                        <h3>محصولی یافت نشد</h3>
-                        <p>در حال حاضر محصولی برای نمایش در این صفحه وجود ندارد.</p>
-                    </div>
+            <ul className="products-grid">
+                {items.map((product : Product) => (
+                    <li key={product.id}>
+                        <ProductItem product={product} />
+                    </li>
+                ))}
+            </ul>
+
+            <nav className="pagination" aria-label="Product Pagination">
+                <button
+                    type="button"
+                    className="pagination-btn"
+                    onClick={() => setCurrentPage((prev) => prev - 1)}
+                    disabled={currentPage === 1}
+                >
+                    Previous
+                </button>
+
+                <div className="pagination-info">
+                    <span className="current-page">{currentPage}</span>
+                    {' '}of{' '}
+                    <span className="total-pages">{totalPages}</span>
                 </div>
-            ) : (
-                <>
-                    <ul className="products-grid">
-                        {items.map((product) => (
-                            <li key={product.id}>
-                                <ProductItem product={product} />
-                            </li>
-                        ))}
-                    </ul>
 
-                    {/* بخش صفحه‌بندی پیشرفته */}
-                    <nav className="pagination" aria-label="Product Pagination">
-                        <button
-                            type="button"
-                            className="pagination-btn"
-                            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                            disabled={currentPage === 1}
-                        >
-                            Previous
-                        </button>
-
-                        <div className="pagination-info">
-                            <span className="current-page">{currentPage}</span> of <span className="total-pages">{totalPages}</span>
-                        </div>
-
-                        <button
-                            type="button"
-                            className="pagination-btn"
-                            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                            disabled={currentPage === totalPages}
-                        >
-                            Next
-                        </button>
-                    </nav>
-                </>
-            )}
+                <button
+                    type="button"
+                    className="pagination-btn"
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                    disabled={currentPage === totalPages}
+                >
+                    Next
+                </button>
+            </nav>
         </div>
     )
 }
