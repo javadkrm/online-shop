@@ -4,6 +4,7 @@ import './App.css'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import Navbar from './app/layout/Navbar/Navbar'
 import ProductsList from './features/products/components/productsList/ProductsList'
+import ToastContainer from './components/ui/toast/ToastContainer'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Navbar />
         <ProductsList />
       </ErrorBoundary>
+      <ToastContainer />
     </Provider>
   )
 }

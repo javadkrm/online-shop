@@ -2,6 +2,8 @@ import type { Product } from '../../types/Product'
 import { useAppDispatch } from '../../../../app/hooks'
 import { increaseCartQuantity } from '../../../cart/cartSlice'
 import './ProductItem.css'
+import { addToast } from '../../../feedback/feedbackSlice'
+
 
 interface ProductItemProps {
     product: Product
@@ -31,10 +33,10 @@ function ProductItem({ product }: ProductItemProps) {
 
             {/* بخش تصویر و گالری هاور */}
             <div className="product-image-container">
-                <img 
-                    src={productImage} 
-                    alt={product.title} 
-                    className="product-image" 
+                <img
+                    src={productImage}
+                    alt={product.title}
+                    className="product-image"
                     loading="lazy"
                 />
             </div>
@@ -47,7 +49,7 @@ function ProductItem({ product }: ProductItemProps) {
                     ) : (
                         <span className="product-category">{product.category}</span>
                     )}
-                    
+
                     {product.rating && (
                         <div className="product-rating" aria-label={`امتیاز ${product.rating} از 5`}>
                             <svg className="star-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -78,16 +80,24 @@ function ProductItem({ product }: ProductItemProps) {
                             <span className="product-original-price">${product.price.toFixed(2)}</span>
                         )}
                     </div>
-                    
+
                     <button
                         type="button"
                         className="add-to-cart-btn"
-                        onClick={() => dispatch(increaseCartQuantity({
-                            id: product.id,
-                            title: product.title,
-                            price: discountedPrice, // اصلاح قیمت ارسالی به سبد خرید (قیمت با تخفیف)
-                            image: productImage,
-                        }))}
+                        onClick={() => {
+                            dispatch(increaseCartQuantity({
+                                id: product.id,
+                                title: product.title,
+                                price: discountedPrice, // اصلاح قیمت ارسالی به سبد خرید (قیمت با تخفیف)
+                                image: productImage,
+                            }))
+                            dispatch(addToast({
+                                id: `${Date.now()}-${product.id}`, // شناسه یکتا برای هر Toast
+                                type: "success",
+                                message: `${product.title} به سبد خرید اضافه شد!`,
+                            }))
+                        }
+                        }
                     >
                         <svg className="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />

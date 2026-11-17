@@ -3,12 +3,14 @@ import cartSlice from "../features/cart/cartSlice"
 import { cartStorageMiddleware } from "../features/cart/services/cartStorageMiddleware"
 import { productApi } from "../features/products/services/productsApi"
 import productSlice from "../features/products/ProductSlice"
+import feedbackSlice from "../features/feedback/feedbackSlice"
 
 const store = configureStore({
     reducer: {
         cart: cartSlice,
         [productApi.reducerPath]: productApi.reducer,
         products: productSlice,
+        feedback : feedbackSlice,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware()
