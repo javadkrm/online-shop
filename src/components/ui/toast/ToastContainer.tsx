@@ -1,12 +1,13 @@
 
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "../../../app/store";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../app/store";
 import { removeToast } from "../../../features/feedback/feedbackSlice";
 import Toast from "./Toast";
 import { useCallback } from "react";
+import { useAppDispatch } from "../../../app/hooks";
 
 const ToastContainer = () => {
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
 
     const toasts = useSelector(
         (state: RootState) => state.feedback.toasts
