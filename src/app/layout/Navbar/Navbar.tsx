@@ -12,7 +12,7 @@ function Navbar() {
     return (
         <>
             <nav className="navbar">
-                <a href="/" className="navbar-brand">فروشگاه من</a>
+                <a href="/" className="navbar-brand">Gigi Kala</a>
                 <CartSummary onClick={() => setIsCartOpen(true)} />
             </nav>
 
@@ -21,7 +21,7 @@ function Navbar() {
                 <div className="cart-modal-overlay" onClick={() => setIsCartOpen(false)}>
                     <div className="cart-modal-content" onClick={(e) => e.stopPropagation()}>
                         <div className="cart-modal-header">
-                            <h3>سبد خرید شما</h3>
+                            <h3>Shopping Cart</h3>
                             <button
                                 type="button"
                                 className="close-modal-btn"

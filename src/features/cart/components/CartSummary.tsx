@@ -9,7 +9,7 @@ function CartSummary({ onClick }: CartSummaryProps) {
 
     return (
         <button type="button" className="cart-summary-btn" onClick={onClick}>
-            <span>🛒 سبد خرید</span>
+            <span>🛒 Shopping Cart</span>
             <span className="cart-badge">{quantity || 0}</span>
         </button>
     );

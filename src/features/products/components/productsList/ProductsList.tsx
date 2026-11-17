@@ -98,11 +98,11 @@ const ProductsList = () => {
                             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                             disabled={currentPage === 1}
                         >
-                            قبلی
+                            Previous
                         </button>
 
                         <div className="pagination-info">
-                            صفحه <span className="current-page">{currentPage}</span> از <span className="total-pages">{totalPages}</span>
+                            <span className="current-page">{currentPage}</span> of <span className="total-pages">{totalPages}</span>
                         </div>
 
                         <button
@@ -111,7 +111,7 @@ const ProductsList = () => {
                             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                             disabled={currentPage === totalPages}
                         >
-                            بعدی
+                            Next
                         </button>
                     </nav>
                 </>

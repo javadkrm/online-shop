@@ -1,63 +1,66 @@
-/* --- استایل کارت محصول (Product Item Card) --- */
+/* --- استایل کلی کارت محصول --- */
 .product-card {
     background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     height: 100%;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid #edf2f7;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid #f1f5f9;
     position: relative;
 }
 
 .product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px rgba(15, 23, 42, 0.08);
+    border-color: #e2e8f0;
 }
 
-/* --- برچسب تخفیف --- */
+/* --- برچسب تخفیف (طراحی شیک با گرادینت) --- */
 .discount-badge {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    background-color: #ef4444;
+    top: 14px;
+    left: 14px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
     color: #ffffff;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    padding: 0.25rem 0.6rem;
-    border-radius: 6px;
-    z-index: 2;
-    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+    padding: 0.3rem 0.65rem;
+    border-radius: 8px;
+    z-index: 3;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+    letter-spacing: -0.2px;
 }
 
-/* --- بخش تصویر محصول --- */
+/* --- کانتینر تصویر محصول --- */
 .product-image-container {
     width: 100%;
-    height: 200px;
-    background-color: #f8fafc;
+    height: 210px;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
     overflow: hidden;
+    position: relative;
 }
 
 .product-image {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card:hover .product-image {
-    transform: scale(1.06);
+    transform: scale(1.08);
 }
 
-/* --- محتوای کارت --- */
+/* --- اطلاعات بدنه کارت --- */
 .product-info {
-    padding: 1.25rem;
+    padding: 1.25rem 1.35rem 1.35rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -69,39 +72,42 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
 }
 
-.product-brand {
-    font-size: 0.75rem;
-    font-weight: 600;
+.product-brand, .product-category {
+    font-size: 0.72rem;
+    font-weight: 700;
     color: #64748b;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
 }
 
 .product-rating {
     display: flex;
     align-items: center;
-    gap: 0.2rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #d97706;
-    background-color: #fef3c7;
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
+    gap: 0.25rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #b45309;
+    background-color: #fffbeb;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #fef3c7;
 }
 
 .star-icon {
-    width: 14px;
-    height: 14px;
+    width: 13px !important;
+    height: 13px !important;
+    color: #f59e0b;
 }
 
+/* --- عنوان محصول --- */
 .product-title {
     font-size: 0.95rem;
-    font-weight: 600;
-    color: #1e293b;
-    margin: 0 0 1rem 0;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.5rem 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -109,13 +115,33 @@
     text-overflow: ellipsis;
     line-height: 1.5;
     height: 3rem;
+    transition: color 0.2s ease;
 }
 
+.product-card:hover .product-title {
+    color: #0284c7;
+}
+
+/* --- هشدار کم بودن موجودی --- */
+.low-stock-warning {
+    font-size: 0.72rem;
+    color: #e11d48;
+    background-color: #fff1f2;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    width: fit-content;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+/* --- فوتر کارت (قیمت و دکمه) --- */
 .product-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px dashed #f1f5f9;
 }
 
 .product-price-box {
@@ -124,57 +150,48 @@
 }
 
 .product-price {
-    font-size: 1.05rem;
-    font-weight: 700;
+    font-size: 1.1rem;
+    font-weight: 800;
     color: #0f172a;
-    margin: 0;
+    line-height: 1.2;
 }
 
 .product-original-price {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: #94a3b8;
     text-decoration: line-through;
-    margin-top: -2px;
+    font-weight: 500;
+    margin-top: 2px;
 }
 
-/* --- دکمه افزودن به سبد خرید --- */
+/* --- دکمه افزودن به سبد خرید (مدرن و دارای آیکون) --- */
 .add-to-cart-btn {
-    background-color: #0284c7;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
     color: #ffffff;
     border: none;
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-    font-weight: 500;
+    border-radius: 10px;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.82rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+    transition: all 0.25s ease;
+}
+
+.add-to-cart-btn .cart-icon {
+    width: 16px;
+    height: 16px;
 }
 
 .add-to-cart-btn:hover {
-    background-color: #0369a1;
+    background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+    box-shadow: 0 6px 15px rgba(2, 132, 199, 0.35);
+    transform: translateY(-2px);
 }
 
 .add-to-cart-btn:active {
-    transform: scale(0.96);
-}
-
-/* --- اصلاح اندازه ستاره امتیاز --- */
-.star-icon {
-    width: 14px !important;
-    height: 14px !important;
-    min-width: 14px;
-    min-height: 14px;
-    display: inline-block;
-}
-
-.product-rating {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #d97706;
-    background-color: #fef3c7;
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
+    transform: scale(0.95);
 }
