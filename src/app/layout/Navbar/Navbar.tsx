@@ -46,10 +46,16 @@ function Navbar() {
                                                     <p className="cart-item-price">${item.price.toFixed(2)}</p>
                                                 </div>
                                                 <div className="cart-item-actions">
-                                                    <button className="qty-btn" onClick={() => dispatch(decreaseCartQuantity(item.id))}>-</button>
+                                                    <button className="qty-btn" onClick={() => dispatch(increaseCartQuantity(item))}>
+                                                        <i className="fa fa-solid fa-plus"></i>
+                                                    </button>
                                                     <span className="cart-item-quantity">{item.quantity}</span>
-                                                    <button className="qty-btn" onClick={() => dispatch(increaseCartQuantity(item))}>+</button>
-                                                    <button className="qty-btn delete-btn" onClick={() => dispatch(removeFromCart(item.id))}>×</button>
+                                                    <button className="qty-btn" onClick={() => dispatch(decreaseCartQuantity(item.id))}>
+                                                        <i className="fa fa-solid fa-minus"></i>
+                                                    </button>
+                                                    <button className="qty-btn delete-btn" onClick={() => dispatch(removeFromCart(item.id))}>
+                                                        <i className="fa fa-solid fa-trash"></i>
+                                                    </button>
                                                 </div>
                                             </li>
                                         ))}

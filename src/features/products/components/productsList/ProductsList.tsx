@@ -7,7 +7,7 @@ import { fetchProducts } from '../../ProductSlice'
 const ProductsList = () => {
     const dispatch = useAppDispatch()
     const [currentPage, setCurrentPage] = useState(1)
-    const limit = 10
+    const limit = 12
 
     const { items, loading, error, total } = useAppSelector((state) => state.products)
     const totalPages = Math.ceil(total / limit) || 1
