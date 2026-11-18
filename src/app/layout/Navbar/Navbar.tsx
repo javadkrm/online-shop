@@ -4,6 +4,7 @@ import CartSummary from '../../../features/cart/components/CartSummary';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { increaseCartQuantity, decreaseCartQuantity, clearCart, removeFromCart } from '../../../features/cart/cartSlice';
 import { addToast } from '../../../features/feedback/feedbackSlice';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -19,12 +20,12 @@ function Navbar() {
                         <a href="/" className="navbar-brand">
                             <span className="brand-icon">🛍️</span> Shop Management
                         </a>
-                        
+
                         <ul className="navbar-nav-links">
-                            <li><a href="#home" className="nav-link">Home</a></li>
-                            <li><a href="#products" className="nav-link">Products</a></li>
-                            <li><a href="#categories" className="nav-link">Categories</a></li>
-                            <li><a href="#blog" className="nav-link">Blog</a></li>
+                            <li><Link className='nav-link' to="/">Home</Link></li>
+                            <li className="nav-link"><Link className='nav-link' to="/products">Products</Link></li>
+                            <li className="nav-link"><Link className='nav-link' to="/categories">Categories</Link></li>
+                            <li className="nav-link"><Link className='nav-link' to="/blog">Blog</Link></li>
                         </ul>
                     </div>
 
@@ -74,7 +75,7 @@ function Navbar() {
                                                     </button>
                                                     <button className="qty-btn delete-btn" onClick={() => {
                                                         dispatch(removeFromCart(item.id))
-                                                        dispatch(addToast({id : `${Date.now()}-${item.id}`, type : "info", message: `${item.title} removed from cart`}))
+                                                        dispatch(addToast({ id: `${Date.now()}-${item.id}`, type: "info", message: `${item.title} removed from cart` }))
                                                     }}>
                                                         <i className="fa fa-solid fa-trash"></i>
                                                     </button>
