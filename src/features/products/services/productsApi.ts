@@ -9,6 +9,7 @@ interface ProductsResponse {
 }
 
 export const productsApi = createApi({
+    tagTypes: ["Products"],
     reducerPath: "productsApi",
 
     baseQuery: fetchBaseQuery({
@@ -16,6 +17,7 @@ export const productsApi = createApi({
     }),
 
     endpoints: (builder) => ({
+
         getProducts: builder.query<
             ProductsResponse,
             { page: number; limit: number }
@@ -27,8 +29,40 @@ export const productsApi = createApi({
                     skip: (page - 1) * limit,
                 },
             }),
+            providesTags: ["Products"],
+        }),
+
+        getProductById: builder.query<Product, number>({
+            query: (id) => `products/${id}`,
+            providesTags: ["Products"],
+        }),
+
+        addProduct: builder.mutation<Product, Partial<Product>>({
+            query: (newProduct) => ({
+                url: "products/add",
+                method: "POST",
+                body: newProduct,
+            }),
+            invalidatesTags: ["Products"],
+        }),
+
+        deleteProduct: builder.mutation<{ id: number }, number>({
+            query: (id) => ({
+                url: `products/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["Products"],
+        }),
+
+        editProduct: builder.mutation<Product, Partial<Product> & { id: number }>({
+            query: ({ id, ...updatedProduct }) => ({
+                url: `products/${id}`,
+                method: "PUT",
+                body: updatedProduct,
+            }),
+            invalidatesTags: ["Products"],
         }),
     }),
 });
 
-export const { useGetProductsQuery } = productsApi;
+export const { useGetProductsQuery, useAddProductMutation, useDeleteProductMutation, useEditProductMutation } = productsApi;

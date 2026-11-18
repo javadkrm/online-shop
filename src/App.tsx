@@ -3,8 +3,10 @@ import store from './app/store'
 import './App.css'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import Navbar from './app/layout/Navbar/Navbar'
-import ProductsList from './features/products/components/productsList/ProductsList'
 import ToastContainer from './components/ui/toast/ToastContainer'
+import Home from './pages/home/Home'
+import Footer from './app/layout/footer/Footer'
+
 
 function App() {
 
@@ -12,7 +14,8 @@ function App() {
     <Provider store={store}>
       <ErrorBoundary>
         <Navbar />
-        <ProductsList />
+        <Home />
+        <Footer />
       </ErrorBoundary>
       <ToastContainer />
     </Provider>

@@ -1,0 +1,194 @@
+/* --- استایل کلی فوتر --- */
+.site-footer {
+  background-color: #0f172a; /* هماهنگ با تم تیره و مدرن پروژه‌مان */
+  color: #94a3b8;
+  font-size: 0.9rem;
+  padding-top: 4rem;
+  margin-top: auto;
+  border-top: 1px solid #1e293b;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2.5rem;
+  padding-bottom: 3rem;
+}
+
+/* --- مشخصات ستون‌ها --- */
+.footer-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.logo-icon {
+  font-size: 1.4rem;
+}
+
+.footer-title {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0; /* برای راست‌چین */
+  width: 30px;
+  height: 2px;
+  background-color: #0284c7;
+  border-radius: 2px;
+}
+
+.footer-desc {
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+/* --- شبکه‌های اجتماعی --- */
+.social-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  background-color: #1e293b;
+  color: #cbd5e1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.social-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.social-icon:hover {
+  background-color: #0284c7;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+/* --- لیست لینک‌ها --- */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease, padding-right 0.2s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #38bdf8;
+  padding-right: 5px; /* افکت حرکت ریز به سمت داخل هنگام هاور */
+}
+
+/* --- خبرنامه --- */
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.newsletter-input {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  color: #ffffff;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.newsletter-input:focus {
+  border-color: #0284c7;
+}
+
+.newsletter-btn {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.newsletter-btn:hover {
+  opacity: 0.9;
+}
+
+.newsletter-btn:active {
+  transform: scale(0.97);
+}
+
+/* --- بخش زیرین فوتر (کپی‌رایت) --- */
+.footer-bottom {
+  background-color: #090d16;
+  padding: 1.25rem 0;
+  border-top: 1px solid #1e293b;
+  font-size: 0.82rem;
+}
+
+.bottom-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 0 !important;
+}
+
+.footer-badges {
+  display: flex;
+  gap: 1.25rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* --- ریسپانسیو برای موبایل --- */
+@media (max-width: 768px) {
+  .bottom-flex {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+  .footer-badges {
+    justify-content: center;
+  }
+}
