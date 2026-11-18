@@ -6,6 +6,7 @@ import MainLayout from "./layout/MainLayout"
 import Home from "../pages/home/Home"
 import Cart from "../pages/Cart/Cart"
 import Profile from "../pages/profile/Profile"
+import ProductDetails from "../features/products/components/ProductDetails/ProductDetails"
 
 export const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
     {
         path: '/products',
         element: <ProductsList />
+    },
+    {
+        path: '/products/:id',
+        element: <ProductDetails />
     },
     {
         path: '/login',
