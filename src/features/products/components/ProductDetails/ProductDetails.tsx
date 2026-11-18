@@ -12,19 +12,22 @@ function ProductDetails() {
 
     const [activeImage, setActiveImage] = useState('');
     const [quantity, setQuantity] = useState(1);
-    const [activeTab, setActiveTab] = useState('warranty'); 
+    const [activeTab, setActiveTab] = useState('warranty');
 
-    const dispatch = useAppDispatch();  
+    const dispatch = useAppDispatch();
 
     const handleAddToCart = () => {
+        if (!product) return;
+        if (product.stock <= 0) return
+
         dispatch(addToCart({
-            id: product?.id || 0,
-            title: product?.title || '',
-            price: product?.price || 0,
+            id: product.id,
+            title: product.title,
+            price: product.price,
             quantity,
-            image: product?.thumbnail || product?.images?.[0] || '',
+            image: product.thumbnail || product.images?.[0] || '',
         }));
-        dispatch(addToast({ message: 'Product added to cart successfully!', type: 'success', id : new Date().toISOString() }));
+        dispatch(addToast({ message: 'Product added to cart successfully!', type: 'success', id: new Date().toISOString() }));
     };
 
     useEffect(() => {
@@ -58,22 +61,22 @@ function ProductDetails() {
         <div className="product-details-container">
             {/* بخش اصلی محصول: گالری و اطلاعات خرید */}
             <div className="product-main-grid">
-                
+
                 {/* ستون چپ: گالری تصاویر */}
                 <div className="product-gallery">
                     <div className="main-image-wrapper">
                         {product.discountPercentage > 0 && (
                             <span className="discount-float-badge">{product.discountPercentage}% OFF</span>
                         )}
-                        <img 
-                            src={activeImage} 
-                            alt={product.title} 
+                        <img
+                            src={activeImage}
+                            alt={product.title}
                         />
                     </div>
                     {product.images && product.images.length > 1 && (
                         <div className="thumbnails-list">
                             {product.images.map((img, index) => (
-                                <button 
+                                <button
                                     key={index}
                                     onClick={() => setActiveImage(img)}
                                     className={`thumbnail-btn ${activeImage === img ? 'active' : ''}`}
@@ -139,11 +142,11 @@ function ProductDetails() {
                                 <span className="quantity-number">{quantity}</span>
                                 <button onClick={() => setQuantity(q => q + 1)}>+</button>
                             </div>
-                            <button 
-                            className="add-to-cart-btn"
-                            onClick={handleAddToCart}
+                            <button
+                                className="add-to-cart-btn"
+                                onClick={handleAddToCart}
                             >
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0" /></svg>
                                 Add to Cart
                             </button>
                         </div>
@@ -160,13 +163,13 @@ function ProductDetails() {
             {/* بخش پایین: تب‌های اطلاعات تکمیلی و نظرات */}
             <div className="product-footer-section">
                 <div className="tabs-header">
-                    <button 
+                    <button
                         className={`tab-btn ${activeTab === 'warranty' ? 'active' : ''}`}
                         onClick={() => setActiveTab('warranty')}
                     >
                         Shipping & Warranty
                     </button>
-                    <button 
+                    <button
                         className={`tab-btn ${activeTab === 'reviews' ? 'active' : ''}`}
                         onClick={() => setActiveTab('reviews')}
                     >
