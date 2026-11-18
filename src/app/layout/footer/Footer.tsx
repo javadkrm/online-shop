@@ -11,7 +11,7 @@ function Footer() {
             <h3>Shop Management</h3>
           </div>
           <p className="footer-desc">
-            فروشگاه ما با ارائه بهترین محصولات و تضمین اصالت کالا، تجربه‌ای امن و لذت‌بخش از خرید آنلاین را برای شما فراهم می‌کند.
+            Our store provides the best products with guaranteed authenticity, offering you a secure and delightful online shopping experience.
           </p>
           <div className="social-links">
             <a href="#instagram" aria-label="Instagram" className="social-icon">
@@ -28,39 +28,39 @@ function Footer() {
 
         {/* ستون دوم: لینک‌های سریع */}
         <div className="footer-col">
-          <h4 className="footer-title">لینک‌های سریع</h4>
+          <h4 className="footer-title">Quick Links</h4>
           <ul className="footer-links">
-            <li><a href="#home">صفحه اصلی</a></li>
-            <li><a href="#products">محصولات</a></li>
-            <li><a href="#categories">دسته‌بندی‌ها</a></li>
-            <li><a href="#about">درباره ما</a></li>
-            <li><a href="#contact">تماس با ما</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#categories">Categories</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
           </ul>
         </div>
 
         {/* ستون سوم: خدمات مشتریان */}
         <div className="footer-col">
-          <h4 className="footer-title">خدمات مشتریان</h4>
+          <h4 className="footer-title">Customer Service</h4>
           <ul className="footer-links">
-            <li><a href="#faq">سؤالات متداول</a></li>
-            <li><a href="#shipping">رویه ارسال سفارش</a></li>
-            <li><a href="#returns">شرایط بازگشت کالا</a></li>
-            <li><a href="#privacy">حریم خصوصی</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#shipping">Shipping Policy</a></li>
+            <li><a href="#returns">Return Policy</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
           </ul>
         </div>
 
         {/* ستون چهارم: خبرنامه */}
         <div className="footer-col newsletter-col">
-          <h4 className="footer-title">خبرنامه</h4>
-          <p className="footer-desc">برای اطلاع از آخرین تخفیف‌ها و محصولات جدید، ایمیل خود را وارد کنید.</p>
+          <h4 className="footer-title">Newsletter</h4>
+          <p className="footer-desc">Subscribe to our newsletter to get updates on the latest discounts and new products.</p>
           <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
             <input 
               type="email" 
-              placeholder="ایمیل شما..." 
+              placeholder="Your email..." 
               required 
               className="newsletter-input"
             />
-            <button type="submit" className="newsletter-btn">عضویت</button>
+            <button type="submit" className="newsletter-btn">Subscribe</button>
           </form>
         </div>
       </div>
@@ -68,10 +68,10 @@ function Footer() {
       {/* بخش پایینی: کپی‌رایت */}
       <div className="footer-bottom">
         <div className="footer-container bottom-flex">
-          <p>&copy; {new Date().getFullYear()} Shop Management. تمامی حقوق محفوظ است.</p>
+          <p>&copy; {new Date().getFullYear()} Shop Management. All rights reserved.</p>
           <div className="footer-badges">
-            <span>🔒 خرید امن</span>
-            <span>⭐ پشتیبانی 24/7</span>
+            <span>🔒 Secure Checkout</span>
+            <span>⭐ 24/7 Support</span>
           </div>
         </div>
       </div>
