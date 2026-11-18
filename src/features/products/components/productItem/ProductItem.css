@@ -195,3 +195,7 @@
 .add-to-cart-btn:active {
     transform: scale(0.95);
 }
+
+.product-link {
+    text-decoration: none;
+}

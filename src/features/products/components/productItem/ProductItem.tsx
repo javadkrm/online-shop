@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../../../app/hooks'
 import { increaseCartQuantity } from '../../../cart/cartSlice'
 import './ProductItem.css'
 import { addToast } from '../../../feedback/feedbackSlice'
+import { Link } from 'react-router-dom'
 
 
 interface ProductItemProps {
@@ -33,12 +34,14 @@ function ProductItem({ product }: ProductItemProps) {
 
             {/* بخش تصویر و گالری هاور */}
             <div className="product-image-container">
-                <img
-                    src={productImage}
-                    alt={product.title}
-                    className="product-image"
-                    loading="lazy"
-                />
+                <Link to={`/products/${product.id}`} className="product-link">
+                    <img
+                        src={productImage}
+                        alt={product.title}
+                        className="product-image"
+                        loading="lazy"
+                    />
+                </Link>
             </div>
 
             <div className="product-info">

@@ -1,27 +1,68 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import {type Product, type NewProduct} from "../types/Product";
+import type { Product } from "../types/Product";
 
-export const productApi = createApi({
-    reducerPath: "productApi",
+interface ProductsResponse {
+    products: Product[];
+    total: number;
+    skip: number;
+    limit: number;
+}
+
+export const productsApi = createApi({
+    tagTypes: ["Products"],
+    reducerPath: "productsApi",
 
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://fakestoreapi.com/",
+        baseUrl: "https://dummyjson.com/",
     }),
 
     endpoints: (builder) => ({
-        getProducts: builder.query<Product[], void>({
-            query: () => "products",
+
+        getProducts: builder.query<
+            ProductsResponse,
+            { page: number; limit: number }
+        >({
+            query: ({ page, limit }) => ({
+                url: "products",
+                params: {
+                    limit,
+                    skip: (page - 1) * limit,
+                },
+            }),
+            providesTags: ["Products"],
         }),
 
-        addProduct: builder.mutation<Product, NewProduct>({
+        getProductById: builder.query<Product, number>({
+            query: (id) => `products/${id}`,
+            providesTags: ["Products"],
+        }),
+
+        addProduct: builder.mutation<Product, Partial<Product>>({
             query: (newProduct) => ({
-                url: "products",
+                url: "products/add",
                 method: "POST",
                 body: newProduct,
             }),
+            invalidatesTags: ["Products"],
+        }),
+
+        deleteProduct: builder.mutation<{ id: number }, number>({
+            query: (id) => ({
+                url: `products/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["Products"],
+        }),
+
+        editProduct: builder.mutation<Product, Partial<Product> & { id: number }>({
+            query: ({ id, ...updatedProduct }) => ({
+                url: `products/${id}`,
+                method: "PUT",
+                body: updatedProduct,
+            }),
+            invalidatesTags: ["Products"],
         }),
     }),
-
 });
 
-export const { useGetProductsQuery, useAddProductMutation } = productApi;
+export const { useGetProductsQuery, useGetProductByIdQuery, useAddProductMutation, useDeleteProductMutation, useEditProductMutation } = productsApi;

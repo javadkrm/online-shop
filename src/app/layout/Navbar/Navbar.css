@@ -1,41 +1,110 @@
 /* --- استایل کلی نوبار --- */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
     background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid #f1f5f9;
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0.85rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* گروه سمت راست (لوگو + منوها) برای کنترل فاصله منظم */
+.navbar-left-group {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
 .navbar-brand {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #2d3748;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f172a;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.brand-icon {
+    font-size: 1.3rem;
+}
+
+/* --- لینک‌های منو --- */
+.navbar-nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #64748b;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #0284c7;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #0284c7;
+    transition: width 0.25s ease;
+    border-radius: 2px;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* --- اکشن‌ها و سبد خرید --- */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    margin-inline-start: 2rem;
 }
 
 /* --- استایل دکمه / خلاصه سبد خرید در نوبار --- */
 .cart-summary-btn {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    background-color: #edf2f7;
+    gap: 0.6rem;
+    background-color: #f8fafc;
     border: 1px solid #e2e8f0;
     padding: 0.5rem 1rem;
-    border-radius: 9999px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     font-weight: 600;
-    color: #2d3748;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    color: #1e293b;
+    transition: all 0.2s ease;
 }
 
 .cart-summary-btn:hover {
-    background-color: #e2e8f0;
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
 }
 
 .cart-summary-btn:active {
@@ -43,11 +112,13 @@
 }
 
 .cart-badge {
-    background-color: #3182ce;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
     color: white;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 700;
     padding: 0.15rem 0.5rem;
-    border-radius: 9999px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(2, 132, 199, 0.2);
 }
 
 /* --- استایل مودال / کشویی سبد خرید (Modal Overlay & Drawer) --- */
@@ -57,7 +128,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(15, 23, 42, 0.5);
     backdrop-filter: blur(4px);
     display: flex;
     justify-content: flex-end;
@@ -70,10 +141,10 @@
     max-width: 420px;
     height: 100%;
     background-color: #ffffff;
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+    box-shadow: -10px 0 30px rgba(15, 23, 42, 0.15);
     display: flex;
     flex-direction: column;
-    animation: slideInRight 0.3s ease;
+    animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     padding-right: 1.5rem;
 }
 
@@ -82,13 +153,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid #f1f5f9;
 }
 
 .cart-modal-header h3 {
     margin: 0;
-    font-size: 1.15rem;
-    color: #2d3748;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
 }
 
 .close-modal-btn {
@@ -96,12 +168,12 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #718096;
+    color: #64748b;
     transition: color 0.2s;
 }
 
 .close-modal-btn:hover {
-    color: #2d3748;
+    color: #0f172a;
 }
 
 .cart-modal-body {
@@ -113,6 +185,14 @@
     justify-content: space-between;
 }
 
+.empty-cart-text {
+    color: #64748b;
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
 /* --- استایل لیست آیتم‌های سبد خرید در مودال --- */
 .cartItems-list {
     list-style: none;
@@ -120,9 +200,9 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.85rem;
     overflow-y: auto;
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 250px);
 }
 
 .cartItems-list-item {
@@ -130,15 +210,15 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-    padding: 0.75rem;
+    padding: 0.85rem;
     background-color: #f8fafc;
-    border: 1px solid #edf2f7;
+    border: 1px solid #f1f5f9;
     border-radius: 12px;
 }
 
 .cartItems-list-item-image {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
     background-color: #ffffff;
     padding: 0.2rem;
@@ -152,31 +232,31 @@
     flex-direction: column;
     gap: 0.15rem;
     flex-grow: 1;
+    min-width: 0;
 }
 
 .cart-item-title {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #2d3748;
+    color: #1e293b;
     margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .cart-item-price {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 700;
-    color: #3182ce;
+    color: #0284c7;
     margin: 0;
 }
 
-/* --- کنترل‌های تعداد (Quantity & Buttons) --- */
+/* --- کنترل‌های تعداد --- */
 .cart-item-actions {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
 .qty-btn {
@@ -190,7 +270,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #2d3748;
+    color: #334155;
     transition: background-color 0.2s;
 }
 
@@ -199,65 +279,19 @@
 }
 
 .cart-item-quantity {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 600;
-    color: #4a5568;
+    color: #334155;
     min-width: 20px;
     text-align: center;
     margin: 0;
 }
 
-/* --- فوتر مودال و دکمه پاک کردن کل --- */
-.cart-modal-footer {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eaeaea;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.clear-cart-btn {
-    background-color: #fff5f5;
-    color: #e53e3e;
-    border: 1px solid #fed7d7;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.clear-cart-btn:hover {
-    background-color: #fed7d7;
-}
-
-/* --- انیمیشن‌ها --- */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(100%);
-    }
-
-    to {
-        transform: translateX(0);
-    }
-}
-
-/* --- استایل فوتر مودال سبد خرید --- */
+/* --- فوتر مودال سبد خرید --- */
 .cart-modal-footer {
     margin-top: auto;
     padding-top: 1rem;
-    border-top: 1px solid #eaeaea;
+    border-top: 1px solid #f1f5f9;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -268,18 +302,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    color: #2d3748;
-    margin: 0;
+    color: #1e293b;
 }
 
 .cart-total-price {
-    color: #3182ce;
-    font-size: 1.2rem;
+    color: #0284c7;
+    font-size: 1.15rem;
 }
 
-/* --- دکمه‌های اقدام در فوتر (تسویه حساب و حذف) --- */
+/* --- دکمه‌های اقدام در فوتر --- */
 .cart-actions-container {
     display: flex;
     gap: 0.75rem;
@@ -287,19 +320,21 @@
 
 .checkout-btn {
     flex: 1;
-    background-color: #3182ce;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
     color: #ffffff;
     border: none;
-    border-radius: 8px;
-    padding: 0.75rem;
-    font-size: 0.95rem;
+    border-radius: 10px;
+    padding: 0.7rem;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+    transition: all 0.2s ease;
 }
 
 .checkout-btn:hover {
-    background-color: #2b6cb0;
+    background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+    transform: translateY(-1px);
 }
 
 .checkout-btn:active {
@@ -307,29 +342,50 @@
 }
 
 .clear-cart-btn {
-    background-color: #fff5f5;
-    color: #e53e3e;
-    border: 1px solid #fed7d7;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
+    background-color: #fff1f2;
+    color: #e11d48;
+    border: 1px solid #ffe4e6;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    font-size: 0.88rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .clear-cart-btn:hover {
-    background-color: #fed7d7;
+    background-color: #ffe4e6;
 }
 
 .delete-btn {
-    background-color: #fff5f5;
-    color: #e53e3e;
-    border: 1px solid #fed7d7;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
+    background-color: #fff1f2;
+    color: #e11d48;
+    border: 1px solid #ffe4e6;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
     cursor: pointer;
     transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: #ffe4e6;
+}
+
+/* --- انیمیشن‌ها --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+/* --- ریسپانسیو برای موبایل --- */
+@media (max-width: 768px) {
+    .navbar-nav-links {
+        display: none;
+    }
 }

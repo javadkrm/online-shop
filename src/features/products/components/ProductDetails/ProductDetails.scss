@@ -1,0 +1,503 @@
+$primary-color: #4f46e5; // رنگ اصلی (بنفش-آبی مدرن)
+$primary-hover: #4338ca;
+$success-color: #10b981;
+$danger-color: #ef4444;
+$text-main: #1f2937;
+$text-muted: #6b7280;
+$bg-light: #f8fafc;
+$border-color: #e2e8f0;
+$radius: 16px;
+$shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+
+.product-status-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+  font-family: inherit;
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid $border-color;
+    border-top-color: $primary-color;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  .error-icon {
+    font-size: 2.5rem;
+  }
+
+  .loading-text, .error-text {
+    color: $text-muted;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.product-details-container {
+  max-width: 1280px;
+  margin: 40px auto;
+  padding: 0 20px;
+  color: $text-main;
+  font-family: system-ui, -apple-system, sans-serif;
+  direction: ltr;
+
+  // بخش اصلی (گالری + اطلاعات)
+  .product-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    background: #ffffff;
+    padding: 32px;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    border: 1px solid $border-color;
+
+    @media (max-width: 968px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // گالری تصاویر
+  .product-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .main-image-wrapper {
+      position: relative;
+      background: $bg-light;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $border-color;
+
+      .discount-float-badge {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: $danger-color;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        z-index: 2;
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        &:hover {
+          transform: scale(1.08);
+        }
+      }
+    }
+
+    .thumbnails-list {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      padding-top: 10px;
+
+      .thumbnail-btn {
+        flex-shrink: 0;
+        width: 75px;
+        height: 75px;
+        border-radius: 10px;
+        border: 2px solid $border-color;
+        background: $bg-light;
+        padding: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          border-radius: 6px;
+        }
+
+        &:hover {
+          border-color: rgba($primary-color, 0.5);
+          transform: translateY(-2px);
+        }
+
+        &.active {
+          border-color: $primary-color;
+          box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+        }
+      }
+    }
+  }
+
+  // اطلاعات محصول
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+
+    .product-info-top {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .category-stock-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      .category-badge {
+        font-size: 0.875rem;
+        color: $text-muted;
+        background: $bg-light;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: 500;
+      }
+
+      .stock-badge {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 20px;
+
+        .dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+        }
+
+        &.in-stock {
+          color: $success-color;
+          background: rgba($success-color, 0.1);
+          .dot { background: $success-color; }
+        }
+
+        &.out-of-stock {
+          color: $danger-color;
+          background: rgba($danger-color, 0.1);
+          .dot { background: $danger-color; }
+        }
+      }
+    }
+
+    .product-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: $text-main;
+      line-height: 1.4;
+    }
+
+    .rating-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .stars {
+        color: #f59e0b;
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+        .empty-stars { color: #e5e7eb; }
+      }
+
+      .rating-number {
+        font-weight: 700;
+        color: $text-main;
+      }
+
+      .reviews-count {
+        color: $text-muted;
+        font-size: 0.9rem;
+      }
+    }
+
+    .price-box {
+      background: $bg-light;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid $border-color;
+
+      .price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 16px;
+
+        .current-price {
+          font-size: 2rem;
+          font-weight: 900;
+          color: $primary-color;
+        }
+
+        .original-price {
+          font-size: 1.1rem;
+          color: $text-muted;
+          text-decoration: line-through;
+        }
+      }
+    }
+
+    .product-description {
+      color: $text-muted;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      background: $bg-light;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+
+      .spec-item {
+        color: $text-muted;
+        span { margin-left: 6px; }
+        strong { color: $text-main; }
+      }
+    }
+  }
+
+  // بخش خرید و افزودن به سبد
+  .cart-action-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-top: 1px solid $border-color;
+    padding-top: 20px;
+
+    .quantity-cart-group {
+      display: flex;
+      gap: 16px;
+
+      .quantity-selector {
+        display: flex;
+        align-items: center;
+        background: $bg-light;
+        border: 1px solid $border-color;
+        border-radius: 12px;
+        overflow: hidden;
+
+        button {
+          background: transparent;
+          border: none;
+          padding: 0 16px;
+          height: 100%;
+          font-size: 1.2rem;
+          color: $text-main;
+          cursor: pointer;
+          transition: background 0.2s;
+
+          &:hover { background: $border-color; }
+        }
+
+        .quantity-number {
+          padding: 0 12px;
+          font-weight: 700;
+          min-width: 30px;
+          text-align: center;
+        }
+      }
+
+      .add-to-cart-btn {
+        flex: 1;
+        background: $primary-color;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba($primary-color, 0.4);
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          background: $primary-hover;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba($primary-color, 0.6);
+        }
+      }
+    }
+
+    .min-order-text {
+      font-size: 0.85rem;
+      color: $text-muted;
+      strong { color: $text-main; }
+    }
+  }
+
+  // بخش فوتر (تب‌ها: ضمانت و نظرات)
+  .product-footer-section {
+    margin-top: 32px;
+    background: #ffffff;
+    border-radius: $radius;
+    border: 1px solid $border-color;
+    box-shadow: $shadow;
+    overflow: hidden;
+
+    .tabs-header {
+      display: flex;
+      border-bottom: 1px solid $border-color;
+      background: $bg-light;
+
+      .tab-btn {
+        padding: 16px 28px;
+        background: transparent;
+        border: none;
+        font-size: 1rem;
+        font-weight: 600;
+        color: $text-muted;
+        cursor: pointer;
+        position: relative;
+        transition: color 0.2s;
+
+        &.active {
+          color: $primary-color;
+          background: #ffffff;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: $primary-color;
+          }
+        }
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+
+    .tab-content {
+      padding: 24px;
+    }
+
+    .card-box {
+      &.warranty-box {
+        .warranty-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+
+          li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: $text-main;
+
+            .icon { font-size: 1.2rem; }
+          }
+        }
+      }
+
+      &.reviews-box {
+        .reviews-list {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+
+          .review-item {
+            background: $bg-light;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid $border-color;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .review-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              .reviewer-name {
+                font-weight: 700;
+                color: $text-main;
+              }
+
+              .stars-sm {
+                color: #f59e0b;
+                font-size: 0.9rem;
+              }
+            }
+
+            .review-comment {
+              color: $text-muted;
+              font-size: 0.9rem;
+              line-height: 1.5;
+            }
+
+            .review-date {
+              font-size: 0.75rem;
+              color: $text-muted;
+              align-self: flex-end;
+            }
+          }
+        }
+
+        .no-reviews {
+          color: $text-muted;
+          text-align: center;
+          padding: 20px;
+        }
+      }
+    }
+  }
+
+  // اسکرول‌بار سفارشی
+  ::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 8px;
+    
+    &:hover { background: #94a3b8; }
+  }
+}
