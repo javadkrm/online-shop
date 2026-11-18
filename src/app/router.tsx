@@ -28,16 +28,16 @@ export const router = createBrowserRouter([
             {
                 path: '/profile',
                 element: <Profile />
-            }
+            },
+            {
+                path: '/products/:id',
+                element: <ProductDetails />
+            },
         ]
     },
     {
         path: '/products',
         element: <ProductsList />
-    },
-    {
-        path: '/products/:id',
-        element: <ProductDetails />
     },
     {
         path: '/login',

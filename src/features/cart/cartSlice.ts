@@ -10,6 +10,17 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+        addToCart(state, action: PayloadAction<CartItem>) {
+            const quantity = Math.max(1, action.payload.quantity);
+            const mainItemIndex = state.items.findIndex(item => item.id === action.payload.id);
+
+            if (mainItemIndex >= 0) {
+                state.items[mainItemIndex].quantity += quantity;
+            }
+            else {
+                state.items.push({ ...action.payload, quantity });
+            }
+        },
         increaseCartQuantity(state, action: PayloadAction<Omit<CartItem, "quantity">>) {
             const mainItemIndex = state.items.findIndex(item => item.id === action.payload.id)
             if (mainItemIndex >= 0) {
@@ -66,4 +77,4 @@ const cartSlice = createSlice({
 
 export default cartSlice.reducer
 
-export const { increaseCartQuantity, decreaseCartQuantity, updateQuantity, removeFromCart, clearCart } = cartSlice.actions // action creators
+export const { addToCart, increaseCartQuantity, decreaseCartQuantity, updateQuantity, removeFromCart, clearCart } = cartSlice.actions // action creators

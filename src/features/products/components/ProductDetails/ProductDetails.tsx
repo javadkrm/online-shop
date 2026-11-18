@@ -3,7 +3,7 @@ import { useGetProductByIdQuery } from '../../services/productsApi';
 import './ProductDetails.scss';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../../../app/hooks';
-import { increaseCartQuantity } from '../../../cart/cartSlice';
+import { addToCart } from '../../../cart/cartSlice';
 import { addToast } from '../../../feedback/feedbackSlice';
 
 function ProductDetails() {
@@ -17,10 +17,11 @@ function ProductDetails() {
     const dispatch = useAppDispatch();  
 
     const handleAddToCart = () => {
-        dispatch(increaseCartQuantity({
+        dispatch(addToCart({
             id: product?.id || 0,
             title: product?.title || '',
             price: product?.price || 0,
+            quantity,
             image: product?.thumbnail || product?.images?.[0] || '',
         }));
         dispatch(addToast({ message: 'Product added to cart successfully!', type: 'success', id : new Date().toISOString() }));
