@@ -28,7 +28,7 @@ function ProductDetails() {
 
     useEffect(() => {
         if (product) {
-            setActiveImage(product.thumbnail || product.images?.[0]);
+            setActiveImage(product.thumbnail || product.images?.[0] || '');
             setQuantity(product.minimumOrderQuantity || 1);
         }
     }, [product]);
@@ -112,9 +112,9 @@ function ProductDetails() {
 
                         <div className="price-box">
                             <div className="price-row">
-                                <span className="current-price">\${discountedPrice}</span>
+                                <span className="current-price">${discountedPrice}</span>
                                 {product.discountPercentage > 0 && (
-                                    <span className="original-price">\${product.price}</span>
+                                    <span className="original-price">${product.price}</span>
                                 )}
                             </div>
                         </div>
