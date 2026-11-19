@@ -8,72 +8,58 @@ import Profile from "../pages/index/profile/Profile"
 import ProductDetails from "../features/products/components/ProductDetails/ProductDetails"
 import StoreLayout from "./layout/StoreLayout"
 import PanelLayout from "./layout/PanelLayout"
+import ProtectedRoute from "../components/auth/ProtectedRoutes"
 
 export const router = createBrowserRouter([
-    // storeFront
     {
         path: '/',
         element: <StoreLayout />,
         children: [
+            { index: true, element: <Home /> },
+            { path: 'products', element: <ProductsList /> },
+            { path: 'products/:id', element: <ProductDetails /> },
+            { path: 'cart', element: <Cart /> },
+            { path: 'blog', element: <Blog /> },
+
             {
-                index: true,
-                element: <Home />
-            },
-            {
-                path: 'products',
-                element: <ProductsList />,
-            },
-            {
-                path: 'cart',
-                element: <Cart />
-            },
-            {
-                path: 'profile',
-                element: <Profile />
-            },
-            {
-                path: 'products/:id',
-                element: <ProductDetails />
-            },
-            {
-                path: '/products',
-                element: <ProductsList />
-            },
-            {
-                path: '/blog',
-                element: <Blog />
+                element: <ProtectedRoute allowedRoles={['user', 'admin']} />,
+                children: [
+                    { path: 'profile', element: <Profile /> }
+                ]
             }
         ]
     },
 
-    // Authentication 
     {
         path: '/login',
         element: <Login />
     },
 
-    // Admin Panel
     {
         path: '/panel',
         element: <PanelLayout />,
         children: [
             {
-                index: true,
-                // element: <Dashboard />
-            },
-            {
-                path: 'products',
-                // element: <AdminProducts />
-            },
-            {
-                path: 'orders',
-                // element: <AdminOrders />
-            },
-            {
-                path: 'users',
-                // element: <AdminUsers />
+                element: <ProtectedRoute allowedRoles={['admin']} />,
+                children: [
+                    {
+                        index: true,
+                        // element: <Dashboard />
+                    },
+                    {
+                        path: 'products',
+                        // element: <AdminProducts />
+                    },
+                    {
+                        path: 'orders',
+                        // element: <AdminOrders />
+                    },
+                    {
+                        path: 'users',
+                        // element: <AdminUsers />
+                    }
+                ]
             }
         ]
-    },
-
+    }
 ])
