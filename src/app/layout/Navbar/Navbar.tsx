@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 function Navbar() {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const cartItems = useAppSelector(state => state.cart.items);
+    const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
     const dispatch = useAppDispatch();
 
     return (
@@ -32,6 +33,12 @@ function Navbar() {
                     {/* دکمه سبد خرید در سمت چپ */}
                     <div className="navbar-actions">
                         <CartSummary onClick={() => setIsCartOpen(true)} />
+                        <Link
+                            className="navbar-account-link"
+                            to={isAuthenticated ? "/profile" : "/login"}
+                        >
+                            {isAuthenticated ? "Profile" : "Login"}
+                        </Link>
                     </div>
                 </div>
             </nav>
