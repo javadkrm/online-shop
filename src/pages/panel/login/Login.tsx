@@ -113,7 +113,7 @@ function Login() {
             dir="ltr"
             lang="en"
         >
-            <form className="login-card" onSubmit={handleSubmit} noValidate>
+            <form className="login-card" onSubmit={handleSubmit}>
                 <div className="login-header">
                     <span className="login-eyebrow">Admin portal</span>
                     <h1 id="login-title">Sign in to your account</h1>
