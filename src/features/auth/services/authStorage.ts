@@ -24,7 +24,17 @@ export function getAuthUser(): User | null {
             return null
         }
 
-        return user
+        const normalizedUser =
+            user.email.toLowerCase() === "mjkarimi@gmail.com" &&
+            user.name === "Admin"
+                ? { ...user, name: "Mj" }
+                : user
+
+        if (normalizedUser !== user) {
+            saveAuthUser(normalizedUser)
+        }
+
+        return normalizedUser
     } catch {
         localStorage.removeItem(AUTH_STORAGE_KEY)
         return null

@@ -81,7 +81,8 @@ function Login() {
                 id: "1",
                 name: "Mj",
                 email,
-                role: "admin" as const
+                role: "admin" as const,
+                image: "https://example.com/mj-avatar.jpg"
             }
         } else if (email === "user@example.com" && password === "user123") {
             user = {
