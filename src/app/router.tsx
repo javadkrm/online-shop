@@ -9,6 +9,7 @@ import ProductDetails from "../features/products/components/ProductDetails/Produ
 import StoreLayout from "./layout/StoreLayout"
 import PanelLayout from "./layout/PanelLayout"
 import ProtectedRoute from "../components/auth/ProtectedRoutes"
+import Register from "../pages/panel/register/Register"
 
 export const router = createBrowserRouter([
     {
@@ -34,7 +35,10 @@ export const router = createBrowserRouter([
         path: '/login',
         element: <Login />
     },
-
+    {
+        path: "/register",
+        element: <Register />
+    },
     {
         path: '/panel',
         element: <PanelLayout />,

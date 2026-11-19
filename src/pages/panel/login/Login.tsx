@@ -9,7 +9,11 @@ import {
     type LoginFormValues
 } from "../../../features/auth/schemas/loginSchema"
 
-import { saveAuthUser } from "../../../features/auth/services/authStorage"
+import {
+    findRegisteredUser,
+    saveAuthUser
+} from "../../../features/auth/services/authStorage"
+
 import { useAppDispatch } from "../../../app/hooks"
 import { login } from "../../../features/auth/authSlice"
 
@@ -37,8 +41,11 @@ function Login() {
 
         let user = null
 
-        // Mock Authentication
-        if (email === "mjkarimi@gmail.com" && password === "mj123") {
+        // Admin account
+        if (
+            email === "mjkarimi@gmail.com" &&
+            password === "mj123"
+        ) {
             user = {
                 id: "1",
                 name: "Mj",
@@ -46,7 +53,10 @@ function Login() {
                 role: "admin" as const,
                 image: "https://example.com/mj-avatar.jpg"
             }
-        } else if (
+        }
+
+        // Default user account
+        else if (
             email === "user@example.com" &&
             password === "user123"
         ) {
@@ -58,11 +68,29 @@ function Login() {
             }
         }
 
+        // Registered users
+        else {
+            const registeredUser = findRegisteredUser(email)
+
+            if (registeredUser) {
+                // Temporary mock password verification
+                // We will improve this in the next backend phase.
+                const registeredPassword = localStorage.getItem(
+                    `user_password_${registeredUser.id}`
+                )
+
+                if (registeredPassword === password) {
+                    user = registeredUser
+                }
+            }
+        }
+
         if (!user) {
             setError("root.server", {
                 type: "manual",
                 message: "Email or password is incorrect."
             })
+
             return
         }
 
@@ -76,58 +104,42 @@ function Login() {
         <section className="login-page">
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
 
-                {/* Email */}
                 <div>
-                    <label htmlFor="email">
-                        Email
-                    </label>
+                    <label htmlFor="email">Email</label>
 
                     <input
                         id="email"
                         type="email"
-                        placeholder="Enter your email"
                         {...register("email", {
                             onChange: () => clearErrors("root.server")
                         })}
                     />
 
                     {errors.email && (
-                        <p className="error-message">
-                            {errors.email.message}
-                        </p>
+                        <p>{errors.email.message}</p>
                     )}
                 </div>
 
-                {/* Password */}
                 <div>
-                    <label htmlFor="password">
-                        Password
-                    </label>
+                    <label htmlFor="password">Password</label>
 
                     <input
                         id="password"
                         type="password"
-                        placeholder="Enter your password"
                         {...register("password", {
                             onChange: () => clearErrors("root.server")
                         })}
                     />
 
                     {errors.password && (
-                        <p className="error-message">
-                            {errors.password.message}
-                        </p>
+                        <p>{errors.password.message}</p>
                     )}
                 </div>
 
-                {/* General Error */}
                 {errors.root?.server && (
-                    <p className="error-message">
-                        {errors.root.server.message}
-                    </p>
+                    <p>{errors.root.server.message}</p>
                 )}
 
-                {/* Submit */}
                 <button
                     type="submit"
                     disabled={isSubmitting}
