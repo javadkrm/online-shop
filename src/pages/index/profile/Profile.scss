@@ -1,0 +1,428 @@
+// Theme Tokens
+$bg-page: #f4f6fb;
+$bg-card: #ffffff;
+$bg-subtle: #f8fafc;
+$bg-subtle-hover: #f1f5f9;
+$text-primary: #0f172a;
+$text-secondary: #475569;
+$text-muted: #64748b;
+$border-color: #e2e8f0;
+$accent: #4f46e5;
+$accent-soft: rgba(79, 70, 229, 0.1);
+$accent-border: rgba(79, 70, 229, 0.25);
+$success: #059669;
+$success-soft: rgba(5, 150, 105, 0.12);
+
+// Danger / Logout Tokens
+$danger: #dc2626 !important;
+$danger-hover: #b91c1c !important;
+$danger-active: #991b1b !important;
+$danger-shadow: rgba(220, 38, 38, 0.28) !important;
+
+$radius-lg: 20px;
+$radius-md: 12px;
+$radius-sm: 8px;
+$shadow-card: 0 12px 32px -12px rgba(15, 23, 42, 0.12),
+  0 2px 6px -1px rgba(15, 23, 42, 0.05);
+$transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+.profile-page {
+  min-height: 100%;
+  padding: 2rem 1rem;
+  background-color: $bg-page;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 760px;
+  background-color: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+
+  &--empty {
+    padding: 3rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__avatar-placeholder {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $bg-subtle-hover, $border-color);
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $text-primary;
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: 0.95rem;
+    color: $text-muted;
+  }
+
+  &__banner {
+    height: 128px;
+    background: linear-gradient(120deg, #4f46e5 0%, #7c3aed 55%, #06b6d4 100%);
+  }
+
+  &__body {
+    padding: 0 2rem 2rem;
+
+    @media (max-width: 600px) {
+      padding: 0 1.25rem 1.5rem;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.25rem;
+    margin-top: -48px;
+    flex-wrap: wrap;
+  }
+
+  &__identity {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.15rem;
+    min-width: 0;
+  }
+
+  &__avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  &__avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid $bg-card;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.14);
+
+    &--fallback {
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, $accent, #7c3aed);
+      color: #ffffff;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+  }
+
+  &__status-dot {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: $success;
+    border: 3px solid $bg-card;
+  }
+
+  &__title-group {
+    padding-bottom: 0.35rem;
+    min-width: 0;
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $text-primary;
+    line-height: 1.25;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: $accent;
+    background-color: $accent-soft;
+    border: 1px solid $accent-border;
+    border-radius: 999px;
+  }
+
+  &__email-sub {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: $text-muted;
+    word-break: break-word;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    padding-bottom: 0.35rem;
+  }
+
+  &__divider {
+    border: 0;
+    border-top: 1px solid $border-color;
+    margin: 1.75rem 0;
+  }
+}
+
+.profile-details {
+  &__heading {
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $text-muted;
+  }
+
+  &__grid {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.detail-item {
+  background-color: $bg-subtle;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: 0.95rem 1.1rem;
+  transition: background-color $transition, border-color $transition,
+    transform $transition;
+
+  &:hover {
+    background-color: $bg-subtle-hover;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+  }
+
+  &__label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: $text-muted;
+    margin-bottom: 0.35rem;
+  }
+
+  &__value {
+    margin: 0;
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: $text-primary;
+    word-break: break-word;
+
+    &--success {
+      color: $success;
+      font-weight: 600;
+    }
+  }
+
+  &__pill {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    border-radius: $radius-sm;
+    background-color: $bg-card;
+    border: 1px solid $border-color;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $text-secondary;
+    text-transform: capitalize;
+  }
+}
+
+.profile-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  border-radius: $radius-md;
+  background-color: $bg-subtle;
+  border: 1px solid $border-color;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  &__desc {
+    margin: 0.2rem 0 0;
+    font-size: 0.85rem;
+    color: $text-muted;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.58rem 1.15rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition;
+
+  &__icon {
+    flex-shrink: 0;
+  }
+
+  &--secondary {
+    background-color: $bg-card;
+    color: $text-primary;
+    border: 1px solid $border-color;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+
+    &:hover {
+      background-color: $bg-subtle-hover;
+      border-color: #cbd5e1;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  &--danger {
+    background-color: $danger;
+    color: #ffffff !important;
+    border: 1px solid $danger;
+    box-shadow: 0 4px 12px $danger-shadow;
+
+    &:hover {
+      background-color: $danger-hover;
+      border-color: $danger-hover;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      background-color: $danger-active;
+      transform: scale(0.98);
+    }
+
+    &:focus-visible {
+      outline: 3px solid rgba(220, 38, 38, 0.35);
+      outline-offset: 2px;
+    }
+  }
+
+  &--logout {
+    padding: 0.65rem 1.3rem;
+    flex-shrink: 0;
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+}
+
+// Optional Dark Mode support via system preference
+@media (prefers-color-scheme: dark) {
+  .profile-page {
+    background-color: #0b1120;
+  }
+
+  .profile-card {
+    background-color: #111827;
+    border-color: #1f2937;
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.55);
+
+    &__avatar,
+    &__status-dot {
+      border-color: #111827;
+    }
+
+    &__title,
+    &__name,
+    .profile-footer__title,
+    .detail-item__value,
+    .btn--secondary {
+      color: #f9fafb;
+    }
+
+    &__subtitle,
+    &__email-sub,
+    .profile-footer__desc,
+    .profile-details__heading,
+    .detail-item__label {
+      color: #9ca3af;
+    }
+
+    &__divider {
+      border-top-color: #1f2937;
+    }
+
+    &__badge {
+      color: #a5b4fc;
+      background-color: rgba(99, 102, 241, 0.16);
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+  }
+
+  .detail-item,
+  .profile-footer {
+    background-color: #182234;
+    border-color: #24324a;
+  }
+
+  .detail-item:hover {
+    background-color: #1e2b42;
+    border-color: #334666;
+  }
+
+  .detail-item__pill {
+    background-color: #111827;
+    border-color: #2a3a54;
+    color: #e5e7eb;
+  }
+
+  .btn--secondary {
+    background-color: #182234;
+    border-color: #2a3a54;
+
+    &:hover {
+      background-color: #22304a;
+    }
+  }
+}
