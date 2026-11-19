@@ -1,21 +1,19 @@
 
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useNavigate } from "react-router-dom"
-import './Login.scss'
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
+import './Login.scss';
 
 import {
     loginSchema,
     type LoginFormValues
-} from "../../../features/auth/schemas/loginSchema"
+} from "../../../features/auth/schemas/loginSchema";
 
-import {
-    findRegisteredUser,
-    saveAuthUser
-} from "../../../features/auth/services/authStorage"
+import { loginApi } from "../../../features/auth/services/authApi";
+import { saveAuthUser } from "../../../features/auth/services/authStorage";
 
-import { useAppDispatch } from "../../../app/hooks"
-import { login } from "../../../features/auth/authSlice"
+import { useAppDispatch } from "../../../app/hooks";
+import { login } from "../../../features/auth/authSlice";
 
 function Login() {
     const {
@@ -23,87 +21,39 @@ function Login() {
         handleSubmit,
         setError,
         clearErrors,
-        formState: {
-            errors,
-            isSubmitting
-        }
+        formState: { errors, isSubmitting }
     } = useForm<LoginFormValues>({
         resolver: zodResolver(loginSchema),
         mode: "onChange"
-    })
+    });
 
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const onSubmit = async (data: LoginFormValues) => {
-        const email = data.email.trim().toLowerCase()
-        const password = data.password
+        try {
+            const response = await loginApi({
+                email: data.email,
+                password: data.password
+            });
 
-        let user = null
+            saveAuthUser(response.user);
+            dispatch(login(response.user));
 
-        // Admin account
-        if (
-            email === "mjkarimi@gmail.com" &&
-            password === "mj123"
-        ) {
-            user = {
-                id: "1",
-                name: "Mj",
-                email,
-                role: "admin" as const,
-                image: "https://example.com/mj-avatar.jpg"
-            }
-        }
-
-        // Default user account
-        else if (
-            email === "user@example.com" &&
-            password === "user123"
-        ) {
-            user = {
-                id: "2",
-                name: "Normal User",
-                email,
-                role: "user" as const
-            }
-        }
-
-        // Registered users
-        else {
-            const registeredUser = findRegisteredUser(email)
-
-            if (registeredUser) {
-                // Temporary mock password verification
-                // We will improve this in the next backend phase.
-                const registeredPassword = localStorage.getItem(
-                    `user_password_${registeredUser.id}`
-                )
-
-                if (registeredPassword === password) {
-                    user = registeredUser
-                }
-            }
-        }
-
-        if (!user) {
+            navigate("/");
+        } catch (error) {
             setError("root.server", {
-                type: "manual",
-                message: "Email or password is incorrect."
-            })
-
-            return
+                type: "server",
+                message: error instanceof Error
+                    ? error.message
+                    : "Login failed."
+            });
         }
-
-        saveAuthUser(user)
-        dispatch(login(user))
-
-        navigate("/")
-    }
+    };
 
     return (
         <section className="login-page">
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
-
                 <div>
                     <label htmlFor="email">Email</label>
 
@@ -140,16 +90,12 @@ function Login() {
                     <p>{errors.root.server.message}</p>
                 )}
 
-                <button
-                    type="submit"
-                    disabled={isSubmitting}
-                >
+                <button type="submit" disabled={isSubmitting}>
                     {isSubmitting ? "Loading..." : "Login"}
                 </button>
-
             </form>
         </section>
-    )
+    );
 }
 
-export default Login
+export default Login;
