@@ -1,4 +1,7 @@
-import { useAppSelector } from "../../../app/hooks";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { logout } from "../../../features/auth/authSlice";
+import { removeAuthUser } from "../../../features/auth/services/authStorage";
 import "./Profile.scss";
 
 function getInitials(name = "") {
@@ -11,6 +14,8 @@ function getInitials(name = "") {
 }
 
 function Profile() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { user } = useAppSelector((state) => state.auth);
 
   if (!user) {
@@ -28,6 +33,12 @@ function Profile() {
   }
 
   const initials = getInitials(user.name) || "U";
+
+  const logoutHandler = () => {
+    removeAuthUser();
+    dispatch(logout());
+    navigate("/login");
+  };
 
   return (
     <section className="profile-page" aria-label="User Profile">
@@ -102,7 +113,9 @@ function Profile() {
               <div className="detail-item">
                 <dt className="detail-item__label">Role</dt>
                 <dd className="detail-item__value">
-                  <span className="detail-item__pill">{user.role || "Member"}</span>
+                  <span className="detail-item__pill">
+                    {user.role || "Member"}
+                  </span>
                 </dd>
               </div>
 
@@ -113,6 +126,42 @@ function Profile() {
                 </dd>
               </div>
             </dl>
+          </div>
+
+          <hr className="profile-card__divider" />
+
+          {/* Session Footer with Prominent Logout Button */}
+          <div className="profile-footer">
+            <div className="profile-footer__info">
+              <h3 className="profile-footer__title">Session</h3>
+              <p className="profile-footer__desc">
+                Sign out of your account on this device.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              className="btn btn--danger btn--logout"
+              onClick={logoutHandler}
+            >
+              <svg
+                className="btn__icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" y1="12" x2="9" y2="12" />
+              </svg>
+              <span>Log out</span>
+            </button>
           </div>
         </div>
       </article>
