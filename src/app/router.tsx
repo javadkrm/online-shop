@@ -1,51 +1,79 @@
 import { createBrowserRouter } from "react-router-dom"
 import ProductsList from "../features/products/components/productsList/ProductsList"
-import Login from "../pages/login/Login"
-import Blog from "../pages/blog/Blog"
-import MainLayout from "./layout/MainLayout"
-import Home from "../pages/home/Home"
-import Cart from "../pages/Cart/Cart"
-import Profile from "../pages/profile/Profile"
+import Login from "../pages/panel/login/Login"
+import Blog from "../pages/index/blog/Blog"
+import Home from "../pages/index/home/Home"
+import Cart from "../pages/index/Cart/Cart"
+import Profile from "../pages/index/profile/Profile"
 import ProductDetails from "../features/products/components/ProductDetails/ProductDetails"
+import StoreLayout from "./layout/StoreLayout"
+import PanelLayout from "./layout/PanelLayout"
 
 export const router = createBrowserRouter([
+    // storeFront
     {
         path: '/',
-        element: <MainLayout />,
+        element: <StoreLayout />,
         children: [
             {
                 index: true,
                 element: <Home />
             },
             {
-                path: '/products',
+                path: 'products',
                 element: <ProductsList />,
             },
             {
-                path: '/cart',
+                path: 'cart',
                 element: <Cart />
             },
             {
-                path: '/profile',
+                path: 'profile',
                 element: <Profile />
             },
             {
-                path: '/products/:id',
+                path: 'products/:id',
                 element: <ProductDetails />
             },
+            {
+                path: '/products',
+                element: <ProductsList />
+            },
+            {
+                path: '/blog',
+                element: <Blog />
+            }
         ]
     },
-    {
-        path: '/products',
-        element: <ProductsList />
-    },
+
+    // Authentication 
     {
         path: '/login',
         element: <Login />
     },
+
+    // Admin Panel
     {
-        path: '/blog',
-        element: <Blog />
-    }
+        path: '/panel',
+        element: <PanelLayout />,
+        children: [
+            {
+                index: true,
+                // element: <Dashboard />
+            },
+            {
+                path: 'products',
+                // element: <AdminProducts />
+            },
+            {
+                path: 'orders',
+                // element: <AdminOrders />
+            },
+            {
+                path: 'users',
+                // element: <AdminUsers />
+            }
+        ]
+    },
 
 ])
