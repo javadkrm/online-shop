@@ -14,6 +14,7 @@ import { saveAuthUser } from "../../../features/auth/services/authStorage";
 
 import { useAppDispatch } from "../../../app/hooks";
 import { login } from "../../../features/auth/authSlice";
+import ThemeToggle from "../../../components/ui/theme/ThemeToggle";
 
 function Register() {
     const {
@@ -55,6 +56,7 @@ function Register() {
 
     return (
         <section className="register-page">
+            <ThemeToggle />
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div>
                     <label htmlFor="firstName">First Name</label>

@@ -3,6 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useAppDispatch } from '../../hooks'
 import { logout } from '../../../features/auth/authSlice'
 import { removeAuthUser } from '../../../features/auth/services/authStorage'
+import ThemeToggle from '../../../components/ui/theme/ThemeToggle'
 import './PanelLayout.scss'
 
 const navigationGroups = [
@@ -81,6 +82,8 @@ function PanelLayout() {
                         </div>
                     ))}
                 </nav>
+
+                <ThemeToggle />
 
                 <button
                     type="button"

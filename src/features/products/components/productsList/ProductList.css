@@ -16,27 +16,27 @@
 
 /* --- استایل کارت محصول (Product Item Card) --- */
 .product-card {
-    background: #ffffff;
+    background: var(--color-surface);
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-card);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid #edf2f7;
+    border: 1px solid var(--color-border);
     position: relative;
 }
 
 .product-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-floating);
 }
 
 /* --- بخش تصویر محصول --- */
 .product-image-container {
     width: 100%;
     height: 220px;
-    background-color: #f8fafc;
+    background-color: var(--color-surface-muted);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,7 +67,7 @@
 .product-title {
     font-size: 0.95rem;
     font-weight: 600;
-    color: #1e293b;
+    color: var(--color-text-primary);
     margin: 0 0 0.75rem 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -88,14 +88,14 @@
 .product-price {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #0284c7;
+    color: var(--color-accent);
     margin: 0;
 }
 
 /* --- دکمه افزودن به سبد خرید --- */
 .add-to-cart-btn {
-    background-color: #0284c7;
-    color: #ffffff;
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
     border: none;
     border-radius: 8px;
     padding: 0.5rem 1rem;
@@ -106,7 +106,7 @@
 }
 
 .add-to-cart-btn:hover {
-    background-color: #0369a1;
+    background-color: var(--color-accent-hover);
 }
 
 .add-to-cart-btn:active {
@@ -125,8 +125,13 @@
 
 .skeleton-image,
 .skeleton-line {
-    background: #f1f5f9;
-    background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+    background: var(--color-surface-muted);
+    background: linear-gradient(
+        90deg,
+        var(--color-surface-muted) 25%,
+        var(--color-border) 50%,
+        var(--color-surface-muted) 75%
+    );
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
 }
@@ -171,14 +176,14 @@
 }
 
 .status-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 16px;
     padding: 2.5rem 2rem;
     text-align: center;
     max-width: 400px;
     width: 100%;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-card);
 }
 
 .status-icon {
@@ -188,30 +193,30 @@
 }
 
 .error-card .status-icon {
-    color: #ef4444;
+    color: var(--color-danger);
 }
 
 .empty-card .status-icon {
-    color: #64748b;
+    color: var(--color-text-muted);
 }
 
 .status-card h3 {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--color-text-primary);
     margin: 0 0 0.5rem 0;
 }
 
 .status-card p {
     font-size: 0.95rem;
-    color: #64748b;
+    color: var(--color-text-secondary);
     margin: 0 0 1.5rem 0;
     line-height: 1.5;
 }
 
 .retry-btn {
-    background-color: #0f172a;
-    color: #ffffff;
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
     border: none;
     border-radius: 8px;
     padding: 0.6rem 1.5rem;
@@ -222,7 +227,7 @@
 }
 
 .retry-btn:hover {
-    background-color: #334155;
+    background-color: var(--color-accent-hover);
 }
 
 /* --- استایل صفحه‌بندی پیشرفته (Pagination) --- */
@@ -235,23 +240,23 @@
 }
 
 .pagination-btn {
-    background-color: #ffffff;
-    color: #0284c7;
-    border: 1px solid #cbd5e1;
+    background-color: var(--color-surface);
+    color: var(--color-accent);
+    border: 1px solid var(--color-border-strong);
     border-radius: 8px;
     padding: 0.5rem 1.25rem;
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    box-shadow: var(--shadow-subtle);
 }
 
 .pagination-btn:hover:not(:disabled) {
-    background-color: #0284c7;
-    color: #ffffff;
-    border-color: #0284c7;
-    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-accent);
     transform: translateY(-1px);
 }
 
@@ -260,23 +265,23 @@
 }
 
 .pagination-btn:disabled {
-    background-color: #f1f5f9;
-    color: #94a3b8;
-    border-color: #e2e8f0;
+    background-color: var(--color-surface-muted);
+    color: var(--color-text-muted);
+    border-color: var(--color-border);
     cursor: not-allowed;
     box-shadow: none;
 }
 
 .pagination-info {
     font-size: 0.95rem;
-    color: #475569;
+    color: var(--color-text-secondary);
     font-weight: 500;
     padding: 0 0.5rem;
 }
 
 .current-page {
     font-weight: 700;
-    color: #0284c7;
+    color: var(--color-accent);
     display: inline-block;
     padding: 0 0.1rem;
 }

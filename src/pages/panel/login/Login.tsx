@@ -14,6 +14,7 @@ import { saveAuthUser } from "../../../features/auth/services/authStorage";
 
 import { useAppDispatch } from "../../../app/hooks";
 import { login } from "../../../features/auth/authSlice";
+import ThemeToggle from "../../../components/ui/theme/ThemeToggle";
 
 function Login() {
     const {
@@ -53,6 +54,7 @@ function Login() {
 
     return (
         <section className="login-page">
+            <ThemeToggle />
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div>
                     <label htmlFor="email">Email</label>

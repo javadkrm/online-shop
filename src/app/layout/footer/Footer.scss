@@ -1,11 +1,11 @@
 /* --- استایل کلی فوتر --- */
 .site-footer {
-  background-color: #0f172a; /* هماهنگ با تم تیره و مدرن پروژه‌مان */
-  color: #94a3b8;
+  background-color: var(--color-footer);
+  color: var(--color-footer-text);
   font-size: 0.9rem;
   padding-top: 4rem;
   margin-top: auto;
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid var(--color-footer-border);
 }
 
 .footer-container {
@@ -28,7 +28,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #ffffff;
+  color: var(--color-footer-heading);
   font-size: 1.15rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -39,7 +39,7 @@
 }
 
 .footer-title {
-  color: #ffffff;
+  color: var(--color-footer-heading);
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 1.25rem;
@@ -54,7 +54,7 @@
   right: 0; /* برای راست‌چین */
   width: 30px;
   height: 2px;
-  background-color: #0284c7;
+  background-color: var(--color-accent);
   border-radius: 2px;
 }
 
@@ -62,7 +62,7 @@
   line-height: 1.6;
   margin-bottom: 1.25rem;
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: var(--color-footer-text);
 }
 
 /* --- شبکه‌های اجتماعی --- */
@@ -74,8 +74,8 @@
 .social-icon {
   width: 36px;
   height: 36px;
-  background-color: #1e293b;
-  color: #cbd5e1;
+  background-color: var(--color-footer-surface);
+  color: var(--color-sidebar-text);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -89,8 +89,8 @@
 }
 
 .social-icon:hover {
-  background-color: #0284c7;
-  color: #ffffff;
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
   transform: translateY(-3px);
 }
 
@@ -105,14 +105,14 @@
 }
 
 .footer-links a {
-  color: #94a3b8;
+  color: var(--color-footer-text);
   text-decoration: none;
   transition: color 0.2s ease, padding-right 0.2s ease;
   display: inline-block;
 }
 
 .footer-links a:hover {
-  color: #38bdf8;
+  color: var(--color-accent);
   padding-right: 5px; /* افکت حرکت ریز به سمت داخل هنگام هاور */
 }
 
@@ -124,23 +124,23 @@
 }
 
 .newsletter-input {
-  background-color: #1e293b;
-  border: 1px solid #334155;
+  background-color: var(--color-footer-surface);
+  border: 1px solid var(--color-footer-border);
   border-radius: 8px;
   padding: 0.65rem 1rem;
-  color: #ffffff;
+  color: var(--color-footer-heading);
   font-size: 0.85rem;
   outline: none;
   transition: border-color 0.2s ease;
 }
 
 .newsletter-input:focus {
-  border-color: #0284c7;
+  border-color: var(--color-accent);
 }
 
 .newsletter-btn {
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+  color: var(--color-on-accent);
   border: none;
   border-radius: 8px;
   padding: 0.65rem 1rem;
@@ -159,9 +159,9 @@
 
 /* --- بخش زیرین فوتر (کپی‌رایت) --- */
 .footer-bottom {
-  background-color: #090d16;
+  background-color: var(--color-footer-bottom);
   padding: 1.25rem 0;
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid var(--color-footer-border);
   font-size: 0.82rem;
 }
 
@@ -177,7 +177,7 @@
 .footer-badges {
   display: flex;
   gap: 1.25rem;
-  color: #64748b;
+  color: var(--color-footer-text);
   font-weight: 500;
 }
 
