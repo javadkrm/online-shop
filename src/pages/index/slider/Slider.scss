@@ -1,8 +1,8 @@
 $slider-radius: 20px;
 $slider-radius-mobile: 14px;
-$primary: #2563eb;
-$primary-hover: #1d4ed8;
-$accent-discount: #f59e0b;
+$primary: var(--color-accent);
+$primary-hover: var(--color-accent-hover);
+$accent-discount: var(--color-warning);
 $text-light: #ffffff;
 $text-muted: rgba(255, 255, 255, 0.88);
 $glass-bg: rgba(15, 23, 42, 0.55);
@@ -21,8 +21,8 @@ $transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
     position: relative;
     overflow: hidden;
     border-radius: $slider-radius;
-    background-color: #0f172a;
-    box-shadow: 0 18px 40px -15px rgba(15, 23, 42, 0.28);
+    background-color: var(--color-sidebar);
+    box-shadow: var(--shadow-floating);
 
     @media (max-width: 640px) {
       border-radius: $slider-radius-mobile;
@@ -65,7 +65,7 @@ $transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     &:focus-visible {
-      outline: 2px solid #ffffff;
+      outline: 2px solid var(--color-on-accent);
       outline-offset: 2px;
     }
 
@@ -106,14 +106,14 @@ $transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
     padding: 0;
     border: none;
     border-radius: 999px;
-    background-color: #cbd5e1;
+    background-color: var(--color-border-strong);
     cursor: pointer;
     transition:
       width 0.3s $transition-smooth,
       background-color 0.2s ease;
 
     &:hover {
-      background-color: #94a3b8;
+      background-color: var(--color-text-muted);
     }
 
     &.is-active {
@@ -210,7 +210,7 @@ $transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
     border-radius: 999px;
     font-size: 0.78rem;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--color-on-warning);
     background-color: $accent-discount;
   }
 
@@ -241,7 +241,7 @@ $transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
     font-size: 0.95rem;
     font-weight: 600;
     text-decoration: none;
-    box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.5);
+    box-shadow: var(--shadow-accent);
     transition:
       background-color 0.2s ease,
       transform 0.15s ease;
@@ -252,7 +252,7 @@ $transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     &:focus-visible {
-      outline: 2px solid #ffffff;
+      outline: 2px solid var(--color-on-accent);
       outline-offset: 2px;
     }
   }

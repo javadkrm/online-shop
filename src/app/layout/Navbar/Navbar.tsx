@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { increaseCartQuantity, decreaseCartQuantity, clearCart, removeFromCart } from '../../../features/cart/cartSlice';
 import { addToast } from '../../../features/feedback/feedbackSlice';
 import { Link } from 'react-router-dom';
+import ThemeToggle from '../../../components/ui/theme/ThemeToggle';
 
 function Navbar() {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -24,7 +25,8 @@ function Navbar() {
                     {/* بخش سمت راست (لوگو و منوها در کنار هم) */}
                     <div className="navbar-left-group">
                         <a href="/" className="navbar-brand">
-                            <span className="brand-icon">🛍️</span> Shop Management
+                            <span className="brand-icon">🛍️</span>
+                            <span className="navbar-brand-label">Shop Management</span>
                         </a>
 
                         <ul className="navbar-nav-links">
@@ -37,10 +39,11 @@ function Navbar() {
 
                     {/* دکمه سبد خرید در سمت چپ */}
                     <div className="navbar-actions">
+                        <ThemeToggle />
                         <CartSummary onClick={() => setIsCartOpen(true)} />
                         {isAuthenticated && user && (
                             <Link
-                                className="navbar-account-link"
+                                className="navbar-account-link navbar-profile-link"
                                 to="/profile"
                             >
                                 Profile

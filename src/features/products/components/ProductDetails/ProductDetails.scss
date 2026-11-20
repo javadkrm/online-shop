@@ -1,13 +1,13 @@
-$primary-color: #4f46e5; // رنگ اصلی (بنفش-آبی مدرن)
-$primary-hover: #4338ca;
-$success-color: #10b981;
-$danger-color: #ef4444;
-$text-main: #1f2937;
-$text-muted: #6b7280;
-$bg-light: #f8fafc;
-$border-color: #e2e8f0;
+$primary-color: var(--color-accent);
+$primary-hover: var(--color-accent-hover);
+$success-color: var(--color-success);
+$danger-color: var(--color-danger);
+$text-main: var(--color-text-primary);
+$text-muted: var(--color-text-secondary);
+$bg-light: var(--color-surface-muted);
+$border-color: var(--color-border);
 $radius: 16px;
-$shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+$shadow: var(--shadow-card);
 
 .product-status-container {
   display: flex;
@@ -55,7 +55,7 @@ $shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.0
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
-    background: #ffffff;
+    background: var(--color-surface);
     padding: 32px;
     border-radius: $radius;
     box-shadow: $shadow;
@@ -88,13 +88,13 @@ $shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.0
         top: 16px;
         right: 16px;
         background: $danger-color;
-        color: white;
+        color: var(--color-on-danger);
         padding: 6px 12px;
         border-radius: 20px;
         font-size: 0.85rem;
         font-weight: 700;
         z-index: 2;
-        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        box-shadow: var(--shadow-danger);
       }
 
       img {
@@ -136,13 +136,13 @@ $shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.0
         }
 
         &:hover {
-          border-color: rgba($primary-color, 0.5);
+          border-color: var(--color-accent-border);
           transform: translateY(-2px);
         }
 
         &.active {
           border-color: $primary-color;
-          box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+          box-shadow: 0 0 0 2px var(--color-accent-ring);
         }
       }
     }
@@ -194,13 +194,13 @@ $shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.0
 
         &.in-stock {
           color: $success-color;
-          background: rgba($success-color, 0.1);
+          background: var(--color-success-soft);
           .dot { background: $success-color; }
         }
 
         &.out-of-stock {
           color: $danger-color;
-          background: rgba($danger-color, 0.1);
+          background: var(--color-danger-soft);
           .dot { background: $danger-color; }
         }
       }
@@ -219,10 +219,10 @@ $shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.0
       gap: 8px;
 
       .stars {
-        color: #f59e0b;
+        color: var(--color-warning);
         font-size: 1.1rem;
         letter-spacing: 2px;
-        .empty-stars { color: #e5e7eb; }
+        .empty-stars { color: var(--color-border-strong); }
       }
 
       .rating-number {
@@ -328,7 +328,7 @@ $shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.0
       .add-to-cart-btn {
         flex: 1;
         background: $primary-color;
-        color: white;
+        color: var(--color-on-accent);
         border: none;
         border-radius: 12px;
         font-weight: 700;
@@ -339,13 +339,13 @@ $shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.0
         gap: 10px;
         padding: 14px 24px;
         cursor: pointer;
-        box-shadow: 0 4px 14px rgba($primary-color, 0.4);
+        box-shadow: var(--shadow-accent);
         transition: all 0.2s ease-in-out;
 
         &:hover {
           background: $primary-hover;
           transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba($primary-color, 0.6);
+          box-shadow: var(--shadow-accent);
         }
       }
     }
@@ -360,7 +360,7 @@ $shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.0
   // بخش فوتر (تب‌ها: ضمانت و نظرات)
   .product-footer-section {
     margin-top: 32px;
-    background: #ffffff;
+    background: var(--color-surface);
     border-radius: $radius;
     border: 1px solid $border-color;
     box-shadow: $shadow;
@@ -384,7 +384,7 @@ $shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.0
 
         &.active {
           color: $primary-color;
-          background: #ffffff;
+          background: var(--color-surface);
 
           &::after {
             content: '';
@@ -455,7 +455,7 @@ $shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.0
               }
 
               .stars-sm {
-                color: #f59e0b;
+                color: var(--color-warning);
                 font-size: 0.9rem;
               }
             }
@@ -490,14 +490,14 @@ $shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.0
   }
 
   ::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: var(--color-surface-muted);
     border-radius: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: var(--color-border-strong);
     border-radius: 8px;
     
-    &:hover { background: #94a3b8; }
+    &:hover { background: var(--color-text-muted); }
   }
 }

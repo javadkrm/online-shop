@@ -1,29 +1,28 @@
 // Theme Tokens
-$bg-page: #f4f6fb;
-$bg-card: #ffffff;
-$bg-subtle: #f8fafc;
-$bg-subtle-hover: #f1f5f9;
-$text-primary: #0f172a;
-$text-secondary: #475569;
-$text-muted: #64748b;
-$border-color: #e2e8f0;
-$accent: #4f46e5;
-$accent-soft: rgba(79, 70, 229, 0.1);
-$accent-border: rgba(79, 70, 229, 0.25);
-$success: #059669;
-$success-soft: rgba(5, 150, 105, 0.12);
+$bg-page: var(--color-page);
+$bg-card: var(--color-surface);
+$bg-subtle: var(--color-surface-muted);
+$bg-subtle-hover: var(--color-surface-hover);
+$text-primary: var(--color-text-primary);
+$text-secondary: var(--color-text-secondary);
+$text-muted: var(--color-text-muted);
+$border-color: var(--color-border);
+$accent: var(--color-accent);
+$accent-soft: var(--color-accent-soft);
+$accent-border: var(--color-accent-border);
+$success: var(--color-success);
+$success-soft: var(--color-success-soft);
 
 // Danger / Logout Tokens
-$danger: #dc2626 !important;
-$danger-hover: #b91c1c !important;
-$danger-active: #991b1b !important;
-$danger-shadow: rgba(220, 38, 38, 0.28) !important;
+$danger: var(--color-danger);
+$danger-hover: var(--color-danger-hover);
+$danger-active: var(--color-danger-active);
+$danger-shadow: var(--shadow-danger);
 
 $radius-lg: 20px;
 $radius-md: 12px;
 $radius-sm: 8px;
-$shadow-card: 0 12px 32px -12px rgba(15, 23, 42, 0.12),
-  0 2px 6px -1px rgba(15, 23, 42, 0.05);
+$shadow-card: var(--shadow-card);
 $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
 .profile-page {
@@ -76,7 +75,12 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &__banner {
     height: 128px;
-    background: linear-gradient(120deg, #4f46e5 0%, #7c3aed 55%, #06b6d4 100%);
+    background: linear-gradient(
+      120deg,
+      var(--color-accent) 0%,
+      var(--color-accent-hover) 55%,
+      var(--color-accent-tertiary) 100%
+    );
   }
 
   &__body {
@@ -114,13 +118,13 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid $bg-card;
-    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.14);
+    box-shadow: var(--shadow-avatar);
 
     &--fallback {
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, $accent, #7c3aed);
-      color: #ffffff;
+      background: linear-gradient(135deg, $accent, var(--color-accent-hover));
+      color: var(--color-on-accent);
       font-size: 1.75rem;
       font-weight: 700;
       letter-spacing: 0.03em;
@@ -226,7 +230,7 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     background-color: $bg-subtle-hover;
-    border-color: #cbd5e1;
+    border-color: var(--color-border-strong);
     transform: translateY(-1px);
   }
 
@@ -312,11 +316,11 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     background-color: $bg-card;
     color: $text-primary;
     border: 1px solid $border-color;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    box-shadow: var(--shadow-subtle);
 
     &:hover {
       background-color: $bg-subtle-hover;
-      border-color: #cbd5e1;
+      border-color: var(--color-border-strong);
     }
 
     &:active {
@@ -326,7 +330,7 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &--danger {
     background-color: $danger;
-    color: #ffffff !important;
+    color: var(--color-on-danger) !important;
     border: 1px solid $danger;
     box-shadow: 0 4px 12px $danger-shadow;
 
@@ -342,7 +346,7 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &:focus-visible {
-      outline: 3px solid rgba(220, 38, 38, 0.35);
+      outline: 3px solid var(--color-danger-ring);
       outline-offset: 2px;
     }
   }
@@ -353,76 +357,6 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     @media (max-width: 600px) {
       width: 100%;
-    }
-  }
-}
-
-// Optional Dark Mode support via system preference
-@media (prefers-color-scheme: dark) {
-  .profile-page {
-    background-color: #0b1120;
-  }
-
-  .profile-card {
-    background-color: #111827;
-    border-color: #1f2937;
-    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.55);
-
-    &__avatar,
-    &__status-dot {
-      border-color: #111827;
-    }
-
-    &__title,
-    &__name,
-    .profile-footer__title,
-    .detail-item__value,
-    .btn--secondary {
-      color: #f9fafb;
-    }
-
-    &__subtitle,
-    &__email-sub,
-    .profile-footer__desc,
-    .profile-details__heading,
-    .detail-item__label {
-      color: #9ca3af;
-    }
-
-    &__divider {
-      border-top-color: #1f2937;
-    }
-
-    &__badge {
-      color: #a5b4fc;
-      background-color: rgba(99, 102, 241, 0.16);
-      border-color: rgba(99, 102, 241, 0.35);
-    }
-  }
-
-  .detail-item,
-  .profile-footer {
-    background-color: #182234;
-    border-color: #24324a;
-  }
-
-  .detail-item:hover {
-    background-color: #1e2b42;
-    border-color: #334666;
-  }
-
-  .detail-item__pill {
-    background-color: #111827;
-    border-color: #2a3a54;
-    color: #e5e7eb;
-  }
-
-  .btn--secondary {
-    background-color: #182234;
-    border-color: #2a3a54;
-
-    &:hover {
-      background-color: #22304a;
     }
   }
 }

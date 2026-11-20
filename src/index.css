@@ -1,3 +1,201 @@
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-page: #f7f9fc;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-muted: #f1f5f9;
+  --color-surface-hover: #eaf0f7;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-accent: #0284c7;
+  --color-accent-hover: #0369a1;
+  --color-accent-tertiary: #06b6d4;
+  --color-on-accent: #ffffff;
+  --color-accent-disabled: #93c5fd;
+  --color-accent-soft: #e0f2fe;
+  --color-accent-glow: rgba(2, 132, 199, 0.06);
+  --color-accent-border: #bae6fd;
+  --color-accent-ring: rgba(2, 132, 199, 0.18);
+  --shadow-accent: 0 6px 18px rgba(2, 132, 199, 0.24);
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-danger-active: #991b1b;
+  --color-on-danger: #ffffff;
+  --color-danger-soft: #fef2f2;
+  --color-danger-border: #fecaca;
+  --color-danger-ring: rgba(220, 38, 38, 0.18);
+  --shadow-danger: 0 4px 12px rgba(220, 38, 38, 0.22);
+  --color-success: #059669;
+  --color-success-text: #047857;
+  --color-success-soft: #ecfdf5;
+  --color-success-border: #a7f3d0;
+  --color-warning: #d97706;
+  --color-warning-text: #92400e;
+  --color-on-warning: #0f172a;
+  --color-warning-soft: #fffbeb;
+  --color-warning-border: #fcd34d;
+  --color-overlay: rgba(15, 23, 42, 0.52);
+  --shadow-subtle: 0 1px 3px rgba(15, 23, 42, 0.12);
+  --shadow-avatar: 0 6px 16px rgba(15, 23, 42, 0.14);
+  --shadow-card: 0 12px 32px -12px rgba(15, 23, 42, 0.12), 0 2px 6px -1px rgba(15, 23, 42, 0.05);
+  --shadow-floating: 0 12px 32px rgba(15, 23, 42, 0.14);
+  --color-footer: #0f172a;
+  --color-footer-surface: #1e293b;
+  --color-footer-bottom: #090d16;
+  --color-footer-border: #1e293b;
+  --color-footer-text: #94a3b8;
+  --color-footer-heading: #ffffff;
+  --color-sidebar: #0f172a;
+  --color-sidebar-text: #cbd5e1;
+  --color-sidebar-muted: #94a3b8;
+  --color-sidebar-hover: rgba(148, 163, 184, 0.12);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-page: #0b1120;
+  --color-surface: #111b2e;
+  --color-surface-raised: #151f32;
+  --color-surface-muted: #172438;
+  --color-surface-hover: #1e2d44;
+  --color-text-primary: #e5edf7;
+  --color-text-secondary: #b6c4d6;
+  --color-text-muted: #94a3b8;
+  --color-border: #26364b;
+  --color-border-strong: #3a4b63;
+  --color-accent: #38bdf8;
+  --color-accent-hover: #7dd3fc;
+  --color-accent-tertiary: #22d3ee;
+  --color-on-accent: #082f49;
+  --color-accent-disabled: #164e63;
+  --color-accent-soft: rgba(56, 189, 248, 0.14);
+  --color-accent-glow: rgba(56, 189, 248, 0.08);
+  --color-accent-border: rgba(56, 189, 248, 0.34);
+  --color-accent-ring: rgba(56, 189, 248, 0.28);
+  --shadow-accent: 0 8px 22px rgba(56, 189, 248, 0.2);
+  --color-danger: #fb7185;
+  --color-danger-hover: #fda4af;
+  --color-danger-active: #fecdd3;
+  --color-on-danger: #4c0519;
+  --color-danger-soft: rgba(251, 113, 133, 0.13);
+  --color-danger-border: rgba(251, 113, 133, 0.28);
+  --color-danger-ring: rgba(251, 113, 133, 0.28);
+  --shadow-danger: 0 6px 16px rgba(251, 113, 133, 0.16);
+  --color-success: #34d399;
+  --color-success-text: #6ee7b7;
+  --color-success-soft: rgba(52, 211, 153, 0.13);
+  --color-success-border: rgba(52, 211, 153, 0.28);
+  --color-warning: #fbbf24;
+  --color-warning-text: #fcd34d;
+  --color-on-warning: #0f172a;
+  --color-warning-soft: rgba(251, 191, 36, 0.13);
+  --color-warning-border: rgba(251, 191, 36, 0.28);
+  --color-overlay: rgba(2, 6, 23, 0.76);
+  --shadow-subtle: 0 2px 5px rgba(0, 0, 0, 0.32);
+  --shadow-avatar: 0 8px 20px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 16px 40px -18px rgba(0, 0, 0, 0.6), 0 3px 10px rgba(0, 0, 0, 0.2);
+  --shadow-floating: 0 16px 36px rgba(0, 0, 0, 0.42);
+  --color-footer: #080e19;
+  --color-footer-surface: #111b2e;
+  --color-footer-bottom: #050911;
+  --color-footer-border: #1b293b;
+  --color-footer-text: #a2b1c5;
+  --color-footer-heading: #e5edf7;
+  --color-sidebar: #080f1c;
+  --color-sidebar-text: #cbd5e1;
+  --color-sidebar-muted: #7f91a9;
+  --color-sidebar-hover: rgba(148, 163, 184, 0.14);
+}
+
+:root[data-theme="light"],
+:root[data-theme="dark"] {
+  --bs-body-font-family: "Vazirmatn", "Inter", sans-serif;
+  --bs-body-color: var(--color-text-primary);
+  --bs-body-bg: var(--color-page);
+  --bs-emphasis-color: var(--color-text-primary);
+  --bs-secondary-color: var(--color-text-secondary);
+  --bs-tertiary-color: var(--color-text-muted);
+  --bs-secondary-bg: var(--color-surface-muted);
+  --bs-tertiary-bg: var(--color-surface-muted);
+  --bs-border-color: var(--color-border);
+  --bs-primary: var(--color-accent);
+  --bs-link-color: var(--color-accent);
+  --bs-link-hover-color: var(--color-accent-hover);
+  --bs-form-control-bg: var(--color-surface-raised);
+  --bs-form-control-color: var(--color-text-primary);
+  --bs-form-control-border-color: var(--color-border-strong);
+  --bs-table-color: var(--color-text-primary);
+  --bs-table-bg: var(--color-surface);
+  --bs-table-border-color: var(--color-border);
+  --bs-table-striped-color: var(--color-text-primary);
+  --bs-table-striped-bg: var(--color-surface-muted);
+  --bs-table-hover-bg: var(--color-surface-hover);
+  --bs-modal-bg: var(--color-surface-raised);
+  --bs-modal-color: var(--color-text-primary);
+  --bs-modal-border-color: var(--color-border);
+  --bs-card-bg: var(--color-surface);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  background-color: var(--color-page);
+}
+
 body {
-  font-family: 'Vazirmatn', 'Inter', sans-serif;
+  min-width: 320px;
+  margin: 0;
+  background-color: var(--color-page);
+  color: var(--color-text-primary);
+  font-family: var(--bs-body-font-family);
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+input,
+select,
+textarea {
+  background-color: var(--color-surface-raised);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-strong);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+table {
+  width: 100%;
+  color: var(--color-text-primary);
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border-color: var(--color-border);
+}
+
+thead {
+  background-color: var(--color-surface-muted);
+}
+
+::selection {
+  background-color: var(--color-accent-soft);
+  color: var(--color-text-primary);
 }

@@ -1,15 +1,15 @@
-$bg-page: #f1f5f9;
-$bg-surface: #ffffff;
-$bg-subtle: #f8fafc;
-$text-primary: #0f172a;
-$text-secondary: #475569;
-$text-muted: #94a3b8;
-$border-subtle: #e2e8f0;
-$accent: #0284c7;
-$accent-hover: #0369a1;
-$accent-soft: #e0f2fe;
-$success: #16a34a;
-$success-soft: #dcfce7;
+$bg-page: var(--color-page);
+$bg-surface: var(--color-surface);
+$bg-subtle: var(--color-surface-muted);
+$text-primary: var(--color-text-primary);
+$text-secondary: var(--color-text-secondary);
+$text-muted: var(--color-text-muted);
+$border-subtle: var(--color-border);
+$accent: var(--color-accent);
+$accent-hover: var(--color-accent-hover);
+$accent-soft: var(--color-accent-soft);
+$success: var(--color-success);
+$success-soft: var(--color-success-soft);
 $radius-lg: 18px;
 $radius-md: 12px;
 $transition: 0.2s ease;
@@ -18,7 +18,7 @@ $transition: 0.2s ease;
   min-height: 100%;
   padding: clamp(1.25rem, 4vw, 2.5rem);
   background:
-    radial-gradient(circle at top right, rgba(2, 132, 199, 0.06), transparent 42%),
+    radial-gradient(circle at top right, var(--color-accent-glow), transparent 42%),
     $bg-page;
   color: $text-primary;
   box-sizing: border-box;
@@ -62,10 +62,10 @@ $transition: 0.2s ease;
   display: grid;
   place-items: center;
   background: linear-gradient(135deg, $accent, $accent-hover);
-  color: #ffffff;
+  color: var(--color-on-accent);
   font-weight: 700;
   font-size: 1.05rem;
-  box-shadow: 0 8px 18px -6px rgba(2, 132, 199, 0.45);
+  box-shadow: var(--shadow-accent);
 }
 
 .dashboard-eyebrow {
@@ -91,8 +91,7 @@ $transition: 0.2s ease;
   border-radius: $radius-lg;
   background: $bg-surface;
   box-shadow:
-    0 10px 25px -12px rgba(15, 23, 42, 0.08),
-    0 2px 6px -1px rgba(15, 23, 42, 0.03);
+    var(--shadow-card);
 }
 
 .dashboard-stat {
@@ -120,8 +119,8 @@ $transition: 0.2s ease;
 
   &:hover {
     transform: translateY(-2px);
-    border-color: #cbd5e1;
-    box-shadow: 0 14px 28px -12px rgba(15, 23, 42, 0.12);
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-floating);
   }
 
   > span {
@@ -208,12 +207,12 @@ $transition: 0.2s ease;
     padding: 0.7rem 1.35rem;
     border-radius: $radius-md;
     background-color: $accent;
-    color: #ffffff;
-    box-shadow: 0 6px 16px -4px rgba(2, 132, 199, 0.45);
+    color: var(--color-on-accent);
+    box-shadow: var(--shadow-accent);
 
     &:hover {
       background-color: $accent-hover;
-      color: #ffffff;
+      color: var(--color-on-accent);
       transform: translateY(-1px);
     }
   }
@@ -242,7 +241,7 @@ $transition: 0.2s ease;
 
     &:hover {
       background-color: $accent-soft;
-      border-color: rgba(2, 132, 199, 0.35);
+      border-color: var(--color-accent-border);
       color: $accent-hover;
       transform: translateY(-1px);
     }

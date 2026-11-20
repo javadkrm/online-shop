@@ -16,14 +16,14 @@
 
   &__eyebrow {
     margin: 0 0 0.4rem;
-    color: #0284c7;
+    color: var(--color-accent);
     font-size: 0.78rem;
     font-weight: 700;
   }
 
   h1 {
     margin: 0;
-    color: #0f172a;
+    color: var(--color-text-primary);
     font-size: clamp(1.4rem, 3vw, 1.9rem);
     font-weight: 800;
   }
@@ -31,7 +31,7 @@
   &__description {
     max-width: 28rem;
     margin: 0;
-    color: #64748b;
+    color: var(--color-text-secondary);
     font-size: 0.92rem;
     line-height: 1.7;
   }
