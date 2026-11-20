@@ -1,0 +1,218 @@
+.panel-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    min-height: 100vh;
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+.panel-sidebar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 1.5rem 1rem 1rem;
+    background: #0f172a;
+    color: #cbd5e1;
+    z-index: 20;
+}
+
+.panel-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 0.5rem 1.75rem;
+    color: #fff;
+
+    strong,
+    span:not(.panel-brand-mark) {
+        display: block;
+    }
+
+    strong {
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+    }
+
+    span:not(.panel-brand-mark) {
+        margin-top: 0.2rem;
+        color: #94a3b8;
+        font-size: 0.72rem;
+    }
+}
+
+.panel-brand-mark {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border-radius: 0.75rem;
+    background: #0284c7;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.panel-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.panel-navigation-heading {
+    margin: 0 0 0.5rem 0.75rem;
+    color: #64748b;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.panel-navigation-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.panel-nav-link,
+.panel-logout {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    padding: 0.6rem 0.75rem;
+    border: 0;
+    border-radius: 0.65rem;
+    background: transparent;
+    color: #cbd5e1;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.18s ease, color 0.18s ease;
+
+    &:hover {
+        background: rgba(148, 163, 184, 0.12);
+        color: #fff;
+    }
+
+    &.is-active {
+        background: #0284c7;
+        color: #fff;
+        font-weight: 600;
+    }
+}
+
+.panel-nav-icon {
+    display: grid;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: 0 0 1.5rem;
+    place-items: center;
+    color: currentColor;
+    font-size: 1.05rem;
+}
+
+.panel-logout {
+    width: 100%;
+    margin-top: auto;
+    color: #fda4af;
+
+    &:hover {
+        background: rgba(244, 63, 94, 0.12);
+        color: #fecdd3;
+    }
+}
+
+.panel-content {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.panel-section {
+    min-height: 15rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+
+    h1 {
+        margin: 0 0 0.75rem;
+        color: #0f172a;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 700;
+    }
+
+    p:last-child {
+        margin: 0;
+        color: #64748b;
+        line-height: 1.6;
+    }
+}
+
+.panel-section-eyebrow {
+    margin: 0 0 0.5rem;
+    color: #0284c7;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.panel-menu-toggle {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .panel-layout {
+        display: block;
+    }
+
+    .panel-sidebar {
+        position: fixed;
+        left: 0;
+        width: min(82vw, 280px);
+        transform: translateX(-100%);
+        transition: transform 0.2s ease;
+
+        &.is-open {
+            transform: translateX(0);
+        }
+    }
+
+    .panel-menu-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 30;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.25rem;
+        width: 2.75rem;
+        height: 2.75rem;
+        padding: 0.7rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.65rem;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        cursor: pointer;
+
+        span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            border-radius: 2px;
+            background: #0f172a;
+        }
+    }
+
+    .panel-content {
+        padding: 5rem 1rem 1.5rem;
+    }
+}

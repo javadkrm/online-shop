@@ -5,10 +5,12 @@ import Blog from "../pages/index/blog/Blog"
 import Home from "../pages/index/home/Home"
 import Cart from "../pages/index/Cart/Cart"
 import Profile from "../pages/index/profile/Profile"
+import Dashboard from "../pages/index/dashboard/Dashboard"
 import ProductDetails from "../features/products/components/ProductDetails/ProductDetails"
 import StoreLayout from "./layout/StoreLayout"
-import PanelLayout from "./layout/PanelLayout"
+import PanelLayout, { PanelSection } from "./layout/panelLayout/PanelLayout"
 import ProtectedRoute from "../components/auth/ProtectedRoutes"
+import Register from "../pages/panel/register/Register"
 
 export const router = createBrowserRouter([
     {
@@ -24,7 +26,8 @@ export const router = createBrowserRouter([
             {
                 element: <ProtectedRoute allowedRoles={['user', 'admin']} />,
                 children: [
-                    { path: 'profile', element: <Profile /> }
+                    { path: 'profile', element: <Profile /> },
+                    { path: 'dashboard', element: <Dashboard /> }
                 ]
             }
         ]
@@ -34,7 +37,10 @@ export const router = createBrowserRouter([
         path: '/login',
         element: <Login />
     },
-
+    {
+        path: "/register",
+        element: <Register />
+    },
     {
         path: '/panel',
         element: <PanelLayout />,
@@ -44,20 +50,36 @@ export const router = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        // element: <Dashboard />
+                        element: <PanelSection section="dashboard" />
                     },
                     {
                         path: 'products',
-                        // element: <AdminProducts />
+                        element: <PanelSection section="products" />
                     },
                     {
                         path: 'orders',
-                        // element: <AdminOrders />
+                        element: <PanelSection section="orders" />
                     },
                     {
                         path: 'users',
-                        // element: <AdminUsers />
-                    }
+                        element: <PanelSection section="users" />
+                    },
+                    {
+                        path: 'categories',
+                        element: <PanelSection section="categories" />
+                    },
+                    {
+                        path: 'comments',
+                        element: <PanelSection section="comments" />
+                    },
+                    {
+                        path: 'reports',
+                        element: <PanelSection section="reports" />
+                    },
+                    {
+                        path: 'settings',
+                        element: <PanelSection section="settings" />
+                    },
                 ]
             }
         ]

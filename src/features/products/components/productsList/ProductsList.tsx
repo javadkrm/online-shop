@@ -6,7 +6,7 @@ import { useGetProductsQuery } from '../../services/productsApi'
 
 const ProductsList = () => {
     const [currentPage, setCurrentPage] = useState(1)
-    const limit = 12
+    const limit = 8
 
     const {
         data,
@@ -44,16 +44,16 @@ const ProductsList = () => {
     if (isError) {
         const errorMessage =
             'status' in error && error.status === 404
-                ? 'محصول موردنظر پیدا نشد.'
-                : 'خطایی در برقراری ارتباط با سرور رخ داده است.'
+                ? 'The requested product could not be found.'
+                : 'A server connection error occurred.'
 
         return (
             <div className="products-status-container">
                 <div className="status-card error-card">
-                    <h3>خطا در بارگذاری</h3>
+                    <h3>Unable to load products</h3>
                     <p>{errorMessage}</p>
                     <button className="retry-btn" onClick={refetch}>
-                        تلاش مجدد
+                        Try again
                     </button>
                 </div>
             </div>
@@ -66,8 +66,8 @@ const ProductsList = () => {
         return (
             <div className="products-status-container">
                 <div className="status-card empty-card">
-                    <h3>محصولی یافت نشد</h3>
-                    <p>در حال حاضر محصولی برای نمایش در این صفحه وجود ندارد.</p>
+                    <h3>No products found</h3>
+                    <p>There are no products to display right now.</p>
                 </div>
             </div>
         )
@@ -78,7 +78,7 @@ const ProductsList = () => {
 
             {isFetching && !isLoading && (
                 <p className="fetching-indicator">
-                    در حال به‌روزرسانی محصولات...
+                    Updating products...
                 </p>
             )}
             

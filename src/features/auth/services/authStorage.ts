@@ -1,46 +1,27 @@
+import type { User } from "../types/authTypes";
 
-import type { User } from "../types/authTypes"
-
-const AUTH_STORAGE_KEY = "auth_user"
-
-function isUser(value: unknown): value is User {
-    if (typeof value !== "object" || value === null) {
-        return false
-    }
-
-    const user = value as Record<string, unknown>
-
-    return (
-        typeof user.id === "string" &&
-        typeof user.name === "string" &&
-        typeof user.email === "string" &&
-        (user.role === "admin" || user.role === "user")
-    )
-}
+const AUTH_STORAGE_KEY = "auth_user";
 
 export function saveAuthUser(user: User): void {
-    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user))
+    localStorage.setItem(
+        AUTH_STORAGE_KEY,
+        JSON.stringify(user)
+    );
 }
 
 export function getAuthUser(): User | null {
     try {
-        const storedUser = localStorage.getItem(AUTH_STORAGE_KEY)
+        const storedUser = localStorage.getItem(AUTH_STORAGE_KEY);
 
-        if (!storedUser) return null
+        if (!storedUser) return null;
 
-        const user: unknown = JSON.parse(storedUser)
-
-        if (!isUser(user)) {
-            removeAuthUser()
-            return null
-        }
-
-        return user
+        return JSON.parse(storedUser) as User;
     } catch {
-        return null
+        removeAuthUser();
+        return null;
     }
 }
 
 export function removeAuthUser(): void {
-    localStorage.removeItem(AUTH_STORAGE_KEY)
+    localStorage.removeItem(AUTH_STORAGE_KEY);
 }

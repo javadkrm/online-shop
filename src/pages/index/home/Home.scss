@@ -1,0 +1,46 @@
+.home {
+  padding-bottom: 3rem;
+}
+
+.home-products {
+  max-width: 1200px;
+  margin: 2rem auto 0;
+
+  &__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  &__eyebrow {
+    margin: 0 0 0.4rem;
+    color: #0284c7;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  h1 {
+    margin: 0;
+    color: #0f172a;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 800;
+  }
+
+  &__description {
+    max-width: 28rem;
+    margin: 0;
+    color: #64748b;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 640px) {
+    &__header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+  }
+}
