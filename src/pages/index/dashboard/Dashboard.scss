@@ -1,0 +1,143 @@
+.dashboard-page {
+  min-height: 100%;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.dashboard-header {
+  margin-bottom: 1.75rem;
+
+  h1 {
+    margin: 0;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+  }
+
+  > p:last-child {
+    margin: 0.6rem 0 0;
+    color: #64748b;
+  }
+}
+
+.dashboard-eyebrow {
+  margin: 0 0 0.5rem;
+  color: #0284c7;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-stat,
+.dashboard-panel,
+.dashboard-empty {
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.dashboard-stat {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.25rem;
+
+  > span {
+    color: #64748b;
+    font-size: 0.85rem;
+  }
+
+  strong {
+    overflow-wrap: anywhere;
+    color: #0f172a;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  small {
+    overflow-wrap: anywhere;
+    color: #94a3b8;
+    font-size: 0.78rem;
+  }
+}
+
+.dashboard-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(240px, 1fr);
+  gap: 1rem;
+}
+
+.dashboard-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 13rem;
+  padding: 1.5rem;
+
+  h2 {
+    margin: 0 0 0.65rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  p:not(.dashboard-eyebrow) {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.6;
+  }
+}
+
+.dashboard-link,
+.dashboard-shortcuts a {
+  color: #0284c7;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: #0369a1;
+    text-decoration: underline;
+  }
+}
+
+.dashboard-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
+
+.dashboard-empty {
+  max-width: 36rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+
+  h1 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin: 0 0 1.25rem;
+    color: #64748b;
+  }
+}
+
+@media (max-width: 760px) {
+  .dashboard-stats,
+  .dashboard-panels {
+    grid-template-columns: 1fr;
+  }
+}

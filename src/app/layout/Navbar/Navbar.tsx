@@ -9,8 +9,13 @@ import { Link } from 'react-router-dom';
 function Navbar() {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const cartItems = useAppSelector(state => state.cart.items);
-    const isAuthenticated = useAppSelector(state => state.auth.isAuthenticated);
+    const { isAuthenticated, user } = useAppSelector(state => state.auth);
     const dispatch = useAppDispatch();
+    const accountLink = !isAuthenticated || !user
+        ? { to: "/login", label: "Login" }
+        : user.role === "admin"
+            ? { to: "/panel", label: "Panel" }
+            : { to: "/dashboard", label: "Dashboard" };
 
     return (
         <>
@@ -24,20 +29,28 @@ function Navbar() {
 
                         <ul className="navbar-nav-links">
                             <li><Link className='nav-link' to="/">Home</Link></li>
-                            <li className="nav-link"><Link className='nav-link' to="/products">Products</Link></li>
-                            <li className="nav-link"><Link className='nav-link' to="/categories">Categories</Link></li>
-                            <li className="nav-link"><Link className='nav-link' to="/blog">Blog</Link></li>
+                            <li><Link className='nav-link' to="/products">Products</Link></li>
+                            <li><Link className='nav-link' to="/categories">Categories</Link></li>
+                            <li><Link className='nav-link' to="/blog">Blog</Link></li>
                         </ul>
                     </div>
 
                     {/* دکمه سبد خرید در سمت چپ */}
                     <div className="navbar-actions">
                         <CartSummary onClick={() => setIsCartOpen(true)} />
+                        {isAuthenticated && user && (
+                            <Link
+                                className="navbar-account-link"
+                                to="/profile"
+                            >
+                                Profile
+                            </Link>
+                        )}
                         <Link
                             className="navbar-account-link"
-                            to={isAuthenticated ? "/profile" : "/login"}
+                            to={accountLink.to}
                         >
-                            {isAuthenticated ? "Profile" : "Login"}
+                            {accountLink.label}
                         </Link>
                     </div>
                 </div>
