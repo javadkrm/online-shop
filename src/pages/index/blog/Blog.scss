@@ -1,0 +1,43 @@
+.blog-page {
+    padding-bottom: 2rem;
+
+    &__hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3.5rem 1rem 2.5rem;
+        text-align: center;
+
+        h1 {
+            margin: 0;
+            color: var(--color-text-primary);
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            font-weight: 850;
+            letter-spacing: -0.055em;
+            line-height: 1.2;
+        }
+
+        > p:last-child {
+            max-width: 38rem;
+            margin: 0.85rem auto 0;
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+    }
+
+    &__eyebrow {
+        margin: 0 0 0.65rem;
+        color: var(--color-accent);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+        &__hero {
+            padding-top: 2.5rem;
+            padding-bottom: 2rem;
+        }
+    }
+}

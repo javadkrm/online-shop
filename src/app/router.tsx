@@ -11,6 +11,7 @@ import StoreLayout from "./layout/StoreLayout"
 import PanelLayout, { PanelSection } from "./layout/panelLayout/PanelLayout"
 import ProtectedRoute from "../components/auth/ProtectedRoutes"
 import Register from "../pages/panel/register/Register"
+import BlogDetails from "../pages/index/blogDetails/BlogDetails"
 
 export const router = createBrowserRouter([
     {
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
             { path: 'products/:id', element: <ProductDetails /> },
             { path: 'cart', element: <Cart /> },
             { path: 'blog', element: <Blog /> },
+            { path: 'blog/:id', element: <BlogDetails /> },
 
             {
                 element: <ProtectedRoute allowedRoles={['user', 'admin']} />,
