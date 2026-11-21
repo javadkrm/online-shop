@@ -5,19 +5,22 @@ import { productsApi } from "../features/products/services/productsApi"
 import productSlice from "../features/products/ProductSlice"
 import feedbackSlice from "../features/feedback/feedbackSlice"
 import { authReducer } from "../features/auth/authSlice"
+import { blogApi } from "../features/blog/services/blogApi"
 
 const store = configureStore({
     reducer: {
         cart: cartSlice,
         [productsApi.reducerPath]: productsApi.reducer,
+        [blogApi.reducerPath]: blogApi.reducer,
         products: productSlice,
-        feedback : feedbackSlice,
-        auth : authReducer
+        feedback: feedbackSlice,
+        auth: authReducer
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware()
             .concat(cartStorageMiddleware)
-            .concat(productsApi.middleware),
+            .concat(productsApi.middleware)
+            .concat(blogApi.middleware)
 })
 
 export default store
