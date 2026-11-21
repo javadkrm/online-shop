@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { logout } from "../../../features/auth/authSlice";
@@ -17,6 +18,7 @@ function Profile() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { user } = useAppSelector((state) => state.auth);
+  const [failedImage, setFailedImage] = useState<string | null>(null);
 
   if (!user) {
     return (
@@ -33,6 +35,7 @@ function Profile() {
   }
 
   const initials = getInitials(user.name) || "U";
+  const shouldShowImage = Boolean(user.image && failedImage !== user.image);
 
   const logoutHandler = () => {
     removeAuthUser();
@@ -50,20 +53,26 @@ function Profile() {
           <div className="profile-card__header">
             <div className="profile-card__identity">
               <div className="profile-card__avatar-wrap">
-                {user.image ? (
+                {shouldShowImage ? (
                   <img
                     src={user.image}
                     alt={user.name || "User avatar"}
                     className="profile-card__avatar"
+                    onError={() => setFailedImage(user.image ?? null)}
                   />
                 ) : (
-                  <div className="profile-card__avatar profile-card__avatar--fallback">
+                  <div
+                    className="profile-card__avatar profile-card__avatar--fallback"
+                    role="img"
+                    aria-label={`${initials} avatar`}
+                  >
                     {initials}
                   </div>
                 )}
                 <span
                   className="profile-card__status-dot"
                   title="Active account"
+                  aria-label="Active account"
                 />
               </div>
 
@@ -88,6 +97,21 @@ function Profile() {
                 className="btn btn--secondary"
                 onClick={() => console.log("Edit profile clicked")}
               >
+                <svg
+                  className="btn__icon"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M12 20h9" />
+                  <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />
+                </svg>
                 Edit Profile
               </button>
             </div>
@@ -122,7 +146,12 @@ function Profile() {
               <div className="detail-item">
                 <dt className="detail-item__label">Account Status</dt>
                 <dd className="detail-item__value detail-item__value--success">
-                  Verified &amp; Active
+                  <span className="detail-item__status">
+                    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path d="m5 10 3.2 3.2L15.5 6" />
+                    </svg>
+                    Verified &amp; Active
+                  </span>
                 </dd>
               </div>
             </dl>

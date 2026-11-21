@@ -11,7 +11,9 @@ $accent: var(--color-accent);
 $accent-soft: var(--color-accent-soft);
 $accent-border: var(--color-accent-border);
 $success: var(--color-success);
+$success-text: var(--color-success-text);
 $success-soft: var(--color-success-soft);
+$success-border: var(--color-success-border);
 
 // Danger / Logout Tokens
 $danger: var(--color-danger);
@@ -26,8 +28,8 @@ $shadow-card: var(--shadow-card);
 $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
 .profile-page {
-  min-height: 100%;
-  padding: 2rem 1rem;
+  min-height: 60vh;
+  padding: clamp(1.5rem, 5vw, 3.5rem) 1rem;
   background-color: $bg-page;
   display: flex;
   justify-content: center;
@@ -36,12 +38,13 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
 .profile-card {
   width: 100%;
-  max-width: 760px;
+  max-width: 900px;
   background-color: $bg-card;
   border: 1px solid $border-color;
   border-radius: $radius-lg;
   box-shadow: $shadow-card;
   overflow: hidden;
+  transition: border-color $transition, box-shadow $transition;
 
   &--empty {
     padding: 3rem 2rem;
@@ -74,58 +77,87 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__banner {
-    height: 128px;
+    position: relative;
+    height: 148px;
+    overflow: hidden;
     background: linear-gradient(
       120deg,
       var(--color-accent) 0%,
       var(--color-accent-hover) 55%,
       var(--color-accent-tertiary) 100%
     );
+
+    &::before,
+    &::after {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 50%;
+      content: "";
+    }
+
+    &::before {
+      top: -150px;
+      right: 12%;
+    }
+
+    &::after {
+      right: -60px;
+      bottom: -180px;
+      width: 300px;
+      height: 300px;
+    }
   }
 
   &__body {
-    padding: 0 2rem 2rem;
+    position: relative;
+    z-index: 1;
+    padding: 0 2.25rem 2.25rem;
 
     @media (max-width: 600px) {
-      padding: 0 1.25rem 1.5rem;
+      padding: 0 1.1rem 1.5rem;
     }
   }
 
   &__header {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     gap: 1.25rem;
-    margin-top: -48px;
     flex-wrap: wrap;
   }
 
   &__identity {
     display: flex;
-    align-items: flex-end;
-    gap: 1.15rem;
+    align-items: center;
+    gap: 1rem;
     min-width: 0;
+    flex: 1 1 420px;
   }
 
   &__avatar-wrap {
     position: relative;
     flex-shrink: 0;
+    transform: translateY(-38px);
   }
 
   &__avatar {
-    width: 96px;
-    height: 96px;
+    display: block;
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid $bg-card;
     box-shadow: var(--shadow-avatar);
+    background-color: $bg-subtle;
 
     &--fallback {
       display: grid;
       place-items: center;
       background: linear-gradient(135deg, $accent, var(--color-accent-hover));
       color: var(--color-on-accent);
-      font-size: 1.75rem;
+      font-size: 1.45rem;
       font-weight: 700;
       letter-spacing: 0.03em;
     }
@@ -133,17 +165,17 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &__status-dot {
     position: absolute;
-    bottom: 6px;
-    right: 6px;
-    width: 16px;
-    height: 16px;
+    bottom: 4px;
+    right: 4px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     background-color: $success;
     border: 3px solid $bg-card;
   }
 
   &__title-group {
-    padding-bottom: 0.35rem;
+    padding-bottom: 0.25rem;
     min-width: 0;
   }
 
@@ -156,10 +188,11 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &__name {
     margin: 0;
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: clamp(1.15rem, 3vw, 1.5rem);
+    font-weight: 800;
     color: $text-primary;
     line-height: 1.25;
+    overflow-wrap: anywhere;
   }
 
   &__badge {
@@ -176,9 +209,9 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__email-sub {
-    margin: 0.25rem 0 0;
+    margin: 0.35rem 0 0;
     font-size: 0.9rem;
-    color: $text-muted;
+    color: $text-secondary;
     word-break: break-word;
   }
 
@@ -188,7 +221,7 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     justify-content: flex-end;
     flex-wrap: wrap;
     gap: 0.65rem;
-    padding-bottom: 0.35rem;
+    flex: 0 0 auto;
   }
 
   &__divider {
@@ -200,19 +233,19 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
 .profile-details {
   &__heading {
-    margin: 0 0 1rem;
-    font-size: 0.95rem;
-    font-weight: 600;
+    margin: 0 0 1.1rem;
+    font-size: 0.9rem;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: $text-muted;
+    color: $text-secondary;
   }
 
   &__grid {
     margin: 0;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
+    gap: 0.9rem;
 
     @media (max-width: 600px) {
       grid-template-columns: 1fr;
@@ -224,7 +257,8 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   background-color: $bg-subtle;
   border: 1px solid $border-color;
   border-radius: $radius-md;
-  padding: 0.95rem 1.1rem;
+  min-width: 0;
+  padding: 1rem 1.1rem;
   transition: background-color $transition, border-color $transition,
     transform $transition;
 
@@ -235,35 +269,60 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__label {
-    font-size: 0.78rem;
-    font-weight: 600;
+    font-size: 0.74rem;
+    font-weight: 700;
     color: $text-muted;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.45rem;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
   }
 
   &__value {
     margin: 0;
-    font-size: 0.98rem;
-    font-weight: 500;
+    font-size: 0.95rem;
+    font-weight: 600;
     color: $text-primary;
     word-break: break-word;
 
     &--success {
-      color: $success;
-      font-weight: 600;
+      color: $success-text;
+      font-weight: 700;
     }
   }
 
   &__pill {
-    display: inline-block;
-    padding: 0.2rem 0.65rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.7rem;
     border-radius: $radius-sm;
-    background-color: $bg-card;
-    border: 1px solid $border-color;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: $text-secondary;
+    background-color: $accent-soft;
+    border: 1px solid $accent-border;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: $accent;
     text-transform: capitalize;
+  }
+
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.28rem 0.7rem;
+    border: 1px solid $success-border;
+    border-radius: 999px;
+    background-color: $success-soft;
+    color: $success-text;
+    font-size: 0.82rem;
+    font-weight: 700;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2;
+    }
   }
 }
 
@@ -272,7 +331,7 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem 1.15rem;
+  padding: 1.1rem 1.2rem;
   border-radius: $radius-md;
   background-color: $bg-subtle;
   border: 1px solid $border-color;
@@ -280,6 +339,10 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   @media (max-width: 600px) {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  &__info {
+    min-width: 0;
   }
 
   &__title {
@@ -301,12 +364,17 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  padding: 0.58rem 1.15rem;
+  padding: 0.68rem 1.05rem;
   font-size: 0.875rem;
   font-weight: 600;
-  border-radius: $radius-sm;
+  border-radius: 10px;
   cursor: pointer;
   transition: all $transition;
+
+  &:focus-visible {
+    outline: 3px solid var(--color-accent-ring);
+    outline-offset: 3px;
+  }
 
   &__icon {
     flex-shrink: 0;
@@ -314,13 +382,14 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &--secondary {
     background-color: $bg-card;
-    color: $text-primary;
-    border: 1px solid $border-color;
+    color: $accent;
+    border: 1px solid $accent-border;
     box-shadow: var(--shadow-subtle);
 
     &:hover {
-      background-color: $bg-subtle-hover;
-      border-color: var(--color-border-strong);
+      background-color: $accent-soft;
+      border-color: $accent;
+      transform: translateY(-1px);
     }
 
     &:active {
@@ -330,7 +399,7 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &--danger {
     background-color: $danger;
-    color: var(--color-on-danger) !important;
+    color: var(--color-on-danger);
     border: 1px solid $danger;
     box-shadow: 0 4px 12px $danger-shadow;
 
@@ -352,11 +421,87 @@ $transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &--logout {
-    padding: 0.65rem 1.3rem;
+    min-height: 44px;
+    padding: 0.7rem 1.25rem;
     flex-shrink: 0;
 
     @media (max-width: 600px) {
       width: 100%;
+    }
+  }
+}
+
+.profile-footer .btn--logout {
+  background-color: $danger;
+  border-color: $danger;
+  color: var(--color-on-danger);
+  box-shadow: 0 4px 12px $danger-shadow;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: $danger-hover;
+    border-color: $danger-hover;
+    color: var(--color-on-danger);
+    box-shadow: 0 6px 16px $danger-shadow;
+  }
+
+  &:active {
+    background-color: $danger-active;
+    border-color: $danger-active;
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline-color: var(--color-danger-ring);
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-card {
+    &__header {
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    &__identity {
+      align-items: center;
+      flex-basis: 100%;
+      gap: 0.8rem;
+    }
+
+    &__avatar-wrap {
+      transform: translateY(-34px);
+    }
+
+    &__avatar {
+      width: 68px;
+      height: 68px;
+      border-width: 3px;
+    }
+
+    &__status-dot {
+      bottom: 3px;
+      right: 3px;
+      width: 14px;
+      height: 14px;
+    }
+
+    &__name-row {
+      gap: 0.45rem;
+    }
+
+    &__badge {
+      padding: 0.2rem 0.55rem;
+      font-size: 0.69rem;
+    }
+
+    &__email-sub {
+      font-size: 0.82rem;
+    }
+
+    &__actions {
+      width: 100%;
+      justify-content: flex-start;
     }
   }
 }
