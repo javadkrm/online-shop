@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { Product } from "../types/Product";
+import type { Category, Product } from "../types/Product";
 
 interface ProductsResponse {
     products: Product[];
@@ -18,12 +18,19 @@ export const productsApi = createApi({
 
     endpoints: (builder) => ({
 
+
         getProducts: builder.query<
             ProductsResponse,
-            { page: number; limit: number }
+            {
+                page: number;
+                limit: number;
+                category?: string;
+            }
         >({
-            query: ({ page, limit }) => ({
-                url: "products",
+            query: ({ page, limit, category }) => ({
+                url: category
+                    ? `products/category/${category}`
+                    : "products",
                 params: {
                     limit,
                     skip: (page - 1) * limit,
@@ -31,6 +38,7 @@ export const productsApi = createApi({
             }),
             providesTags: ["Products"],
         }),
+
 
         getProductById: builder.query<Product, number>({
             query: (id) => `products/${id}`,
@@ -62,7 +70,11 @@ export const productsApi = createApi({
             }),
             invalidatesTags: ["Products"],
         }),
+        getCategories: builder.query<Category[], void>({
+            query: () => "products/categories",
+            providesTags: ["Products"],
+        }),
     }),
 });
 
-export const { useGetProductsQuery, useGetProductByIdQuery, useAddProductMutation, useDeleteProductMutation, useEditProductMutation } = productsApi;
+export const { useGetProductsQuery, useGetProductByIdQuery, useAddProductMutation, useDeleteProductMutation, useEditProductMutation, useGetCategoriesQuery } = productsApi;
