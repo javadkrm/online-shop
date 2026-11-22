@@ -18,10 +18,10 @@ const Toast = ({ toast, onClose }: Props) => {
     }, [toast.id, onClose]);
     
     const presentation = {
-        success: { label: "موفق", icon: "success" },
-        error: { label: "خطا", icon: "error" },
-        warning: { label: "هشدار", icon: "warning" },
-        info: { label: "اطلاع‌رسانی", icon: "info" },
+        success: { label: "Success", icon: "success" },
+        error: { label: "Error", icon: "error" },
+        warning: { label: "Warning", icon: "warning" },
+        info: { label: "Information", icon: "info" },
     };
 
     const currentPresentation = presentation[toast.type];
@@ -53,14 +53,14 @@ const Toast = ({ toast, onClose }: Props) => {
             </span>
 
             <div className="app-toast-content">
-                <strong className="app-toast-title fw-bolder fs-5">{currentPresentation.label}</strong>
-                <p className="app-toast-message fw-bold">{toast.message}</p>
+                <strong className="app-toast-title">{currentPresentation.label}</strong>
+                <p className="app-toast-message">{toast.message}</p>
             </div>
 
             <button
                 type="button"
                 className="app-toast-close"
-                aria-label="بستن پیام"
+                aria-label="Dismiss notification"
                 onClick={() => onClose(toast.id)}
             >
                 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
