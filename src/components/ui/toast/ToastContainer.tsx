@@ -21,9 +21,7 @@ const ToastContainer = () => {
     );
 
     return (
-        <div
-            className="app-toast-container"
-        >
+        <div className="app-toast-container" role="region" aria-label="Notifications">
             {toasts.map(toast => (
                 <Toast
                     key={toast.id}

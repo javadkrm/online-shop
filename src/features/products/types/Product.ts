@@ -55,3 +55,8 @@ export interface ApiError {
   message: string;
   status: number;
 }
+export interface Category {
+  slug: string;
+  name: string;
+  url: string;
+}

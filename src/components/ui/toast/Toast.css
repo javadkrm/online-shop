@@ -1,12 +1,15 @@
 .app-toast-container {
     position: fixed;
     top: 1rem;
-    right: 1rem;
+    inset-inline-end: 1rem;
     z-index: 1090;
     display: grid;
+    align-content: start;
     gap: 0.75rem;
     width: min(26rem, calc(100vw - 2rem));
-    direction: rtl;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    direction: ltr;
     pointer-events: none;
 }
 
@@ -15,18 +18,18 @@
     --toast-tint: var(--color-accent-soft);
     --toast-border: var(--color-accent-border);
     display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
+    align-items: center;
+    gap: 0.75rem;
     padding: 1rem;
     overflow: hidden;
     background: var(--color-surface-raised);
     border: 1px solid var(--toast-border);
     border-inline-start: 4px solid var(--toast-accent);
-    border-radius: 0.9rem;
+    border-radius: 1rem;
     box-shadow: var(--shadow-floating);
     color: var(--color-text-primary);
     pointer-events: auto;
-    animation: app-toast-enter 220ms ease-out both;
+    animation: app-toast-enter 240ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .app-toast--success {
@@ -72,22 +75,22 @@
 .app-toast-content {
     flex: 1;
     min-width: 0;
-    padding-top: 0.1rem;
 }
 
 .app-toast-title {
     display: block;
     color: var(--color-text-primary);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: 700;
-    line-height: 1.4;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
 }
 
 .app-toast-message {
-    margin: 0.25rem 0 0;
+    margin: 0.2rem 0 0;
     color: var(--color-text-secondary);
     font-size: 0.875rem;
-    line-height: 1.65;
+    line-height: 1.5;
     overflow-wrap: anywhere;
 }
 
@@ -128,20 +131,32 @@
 @keyframes app-toast-enter {
     from {
         opacity: 0;
-        transform: translateY(-0.5rem) scale(0.98);
+        transform: translateX(0.75rem) scale(0.98);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateX(0) scale(1);
     }
 }
 
 @media (max-width: 480px) {
     .app-toast-container {
         top: 0.75rem;
-        right: 0.75rem;
+        inset-inline-end: 0.75rem;
         width: calc(100vw - 1.5rem);
+        max-height: calc(100vh - 1.5rem);
+    }
+
+    .app-toast {
+        gap: 0.625rem;
+        padding: 0.875rem;
+    }
+
+    .app-toast-icon {
+        flex-basis: 2.25rem;
+        width: 2.25rem;
+        height: 2.25rem;
     }
 }
 

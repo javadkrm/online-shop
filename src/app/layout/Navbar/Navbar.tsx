@@ -24,15 +24,14 @@ function Navbar() {
                 <div className="navbar-container">
                     {/* بخش سمت راست (لوگو و منوها در کنار هم) */}
                     <div className="navbar-left-group">
-                        <a href="/" className="navbar-brand">
+                        <Link to="/" className="navbar-brand">
                             <span className="brand-icon">🛍️</span>
                             <span className="navbar-brand-label">Shop Management</span>
-                        </a>
+                        </Link>
 
                         <ul className="navbar-nav-links">
                             <li><Link className='nav-link' to="/">Home</Link></li>
                             <li><Link className='nav-link' to="/products">Products</Link></li>
-                            <li><Link className='nav-link' to="/categories">Categories</Link></li>
                             <li><Link className='nav-link' to="/blog">Blog</Link></li>
                         </ul>
                     </div>

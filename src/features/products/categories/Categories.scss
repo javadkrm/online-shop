@@ -1,0 +1,119 @@
+.categories {
+    margin-bottom: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-card);
+}
+
+.categories__header {
+    margin-bottom: 1rem;
+}
+
+.categories__title {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.categories__description {
+    margin: 0.3rem 0 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.categories__list {
+    display: flex;
+    gap: 0.625rem;
+    overflow-x: auto;
+    padding: 0.2rem 0 0.5rem;
+    scrollbar-color: var(--color-border-strong) transparent;
+    scrollbar-width: thin;
+}
+
+.categories__item {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+    color: var(--color-text-secondary);
+    background: var(--color-surface-muted);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.25;
+    text-decoration: none;
+    transition:
+        color 160ms ease,
+        background-color 160ms ease,
+        border-color 160ms ease,
+        box-shadow 160ms ease;
+}
+
+a.categories__item:hover {
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent-border);
+}
+
+.categories__item:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--color-accent-ring);
+}
+
+.categories__item--active,
+a.categories__item--active:hover {
+    color: var(--color-on-accent);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.categories__item--skeleton {
+    width: 7rem;
+    background: linear-gradient(
+        90deg,
+        var(--color-surface-muted) 25%,
+        var(--color-border) 50%,
+        var(--color-surface-muted) 75%
+    );
+    background-size: 200% 100%;
+    animation: categories-shimmer 1.4s ease-in-out infinite;
+}
+
+.categories__error {
+    margin: 0.75rem 0 0;
+    color: var(--color-danger);
+    font-size: 0.875rem;
+}
+
+@keyframes categories-shimmer {
+    to {
+        background-position: -200% 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .categories {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+    }
+
+    .categories__title {
+        font-size: 1.05rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .categories__item {
+        transition: none;
+    }
+
+    .categories__item--skeleton {
+        animation: none;
+    }
+}

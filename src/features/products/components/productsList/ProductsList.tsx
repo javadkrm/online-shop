@@ -1,11 +1,15 @@
-
-import { useState } from 'react'
 import ProductItem from '../productItem/ProductItem'
 import './ProductList.css'
 import { useGetProductsQuery } from '../../services/productsApi'
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import Categories from '../../categories/Categories'
 
 const ProductsList = () => {
-    const [currentPage, setCurrentPage] = useState(1)
+    const { category } = useParams()
+    const [pagesByCategory, setPagesByCategory] = useState<Record<string, number>>({})
+    const categoryKey = category ?? 'all'
+    const currentPage = pagesByCategory[categoryKey] ?? 1
     const limit = 8
 
     const {
@@ -15,13 +19,23 @@ const ProductsList = () => {
         isError,
         error,
         refetch,
-    } = useGetProductsQuery({ page: currentPage, limit }, { refetchOnMountOrArgChange: 30 })
+    } = useGetProductsQuery(
+        {
+            page: currentPage,
+            limit,
+            category,
+        },
+        {
+            refetchOnMountOrArgChange: 30,
+        }
+    )
 
     const totalPages = Math.ceil((data?.total ?? 0) / limit) || 1
 
     if (isLoading) {
         return (
             <div className="products-container">
+                <Categories />
                 <div className="products-grid">
                     {Array.from({ length: limit }).map((_, index) => (
                         <div key={index} className="product-card skeleton-card">
@@ -44,17 +58,22 @@ const ProductsList = () => {
     if (isError) {
         const errorMessage =
             'status' in error && error.status === 404
-                ? 'The requested product could not be found.'
+                ? category
+                    ? 'The requested category could not be found.'
+                    : 'The requested product could not be found.'
                 : 'A server connection error occurred.'
 
         return (
-            <div className="products-status-container">
-                <div className="status-card error-card">
-                    <h3>Unable to load products</h3>
-                    <p>{errorMessage}</p>
-                    <button className="retry-btn" onClick={refetch}>
-                        Try again
-                    </button>
+            <div className="products-container">
+                <Categories />
+                <div className="products-status-container">
+                    <div className="status-card error-card">
+                        <h3>Unable to load products</h3>
+                        <p>{errorMessage}</p>
+                        <button className="retry-btn" onClick={refetch}>
+                            Try again
+                        </button>
+                    </div>
                 </div>
             </div>
         )
@@ -64,10 +83,13 @@ const ProductsList = () => {
 
     if (items.length === 0) {
         return (
-            <div className="products-status-container">
-                <div className="status-card empty-card">
-                    <h3>No products found</h3>
-                    <p>There are no products to display right now.</p>
+            <div className="products-container">
+                <Categories />
+                <div className="products-status-container">
+                    <div className="status-card empty-card">
+                        <h3>No products found</h3>
+                        <p>There are no products to display right now.</p>
+                    </div>
                 </div>
             </div>
         )
@@ -75,13 +97,14 @@ const ProductsList = () => {
 
     return (
         <div className="products-container">
+            <Categories />
 
             {isFetching && !isLoading && (
                 <p className="fetching-indicator">
                     Updating products...
                 </p>
             )}
-            
+
             <ul className="products-grid">
                 {items.map((product) => (
                     <li key={product.id}>
@@ -94,7 +117,12 @@ const ProductsList = () => {
                 <button
                     type="button"
                     className="pagination-btn"
-                    onClick={() => setCurrentPage((prev) => prev - 1)}
+                    onClick={() =>
+                        setPagesByCategory((pages) => ({
+                            ...pages,
+                            [categoryKey]: currentPage - 1,
+                        }))
+                    }
                     disabled={currentPage === 1}
                 >
                     Previous
@@ -109,7 +137,12 @@ const ProductsList = () => {
                 <button
                     type="button"
                     className="pagination-btn"
-                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                    onClick={() =>
+                        setPagesByCategory((pages) => ({
+                            ...pages,
+                            [categoryKey]: currentPage + 1,
+                        }))
+                    }
                     disabled={currentPage === totalPages}
                 >
                     Next
